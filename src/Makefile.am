@@ -9,11 +9,11 @@ esekeyd_SOURCES = esekeyd.c input.c parser.c esekey.h
 noinst_PROGRAMS = mkparser
 mkparser_SOURCES = mkparser.c
 
-#parser.c: mkparser /usr/include/linux/input.h
-#	./mkparser /usr/include/linux/input.h > parser.c
+parser.c: mkparser /usr/include/linux/input.h
+	./mkparser /usr/include/linux/input.h > parser.c
 
-parser.c: mkparser /usr/src/linux/include/linux/input.h
-	./mkparser /usr/src/linux/include/linux/input.h > parser.c
+#parser.c: mkparser /usr/src/linux/include/linux/input.h
+#	./mkparser /usr/src/linux/include/linux/input.h > parser.c
 
 clean-local:
 	rm -f parser.c
