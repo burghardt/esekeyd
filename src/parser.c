@@ -5,15 +5,230 @@
 char*
 parse(struct input_event ev)
 {
+	static char *ret_val;
 
 	if (ev.type == EV_KEY && ev.value == 1) {
 
 		switch (ev.code) {
 
-			/* Keys with keykodes < 111 are useless for Funkey
-			   because they are present on all keyboards
-			   (e.g. letters, numbers, ENTER, SHIFT, other) */
-
+			case 1:
+				return "ESC";
+			case 2:
+				return "1";
+			case 3:
+				return "2";
+			case 4:
+				return "3";
+			case 5:
+				return "4";
+			case 6:
+				return "5";
+			case 7:
+				return "6";
+			case 8:
+				return "7";
+			case 9:
+				return "8";
+			case 10:
+				return "9";
+			case 11:
+				return "0";
+			case 12:
+				return "MINUS";
+			case 13:
+				return "EQUAL";
+			case 14:
+				return "BACKSPACE";
+			case 15:
+				return "TAB";
+			case 16:
+				return "Q";
+			case 17:
+				return "W";
+			case 18:
+				return "E";
+			case 19:
+				return "R";
+			case 20:
+				return "T";
+			case 21:
+				return "Y";
+			case 22:
+				return "U";
+			case 23:
+				return "I";
+			case 24:
+				return "O";
+			case 25:
+				return "P";
+			case 26:
+				return "LEFTBRACE";
+			case 27:
+				return "RIGHTBRACE";
+			case 28:
+				return "ENTER";
+			case 29:
+				return "LEFTCTRL";
+			case 30:
+				return "A";
+			case 31:
+				return "S";
+			case 32:
+				return "D";
+			case 33:
+				return "F";
+			case 34:
+				return "G";
+			case 35:
+				return "H";
+			case 36:
+				return "J";
+			case 37:
+				return "K";
+			case 38:
+				return "L";
+			case 39:
+				return "SEMICOLON";
+			case 40:
+				return "APOSTROPHE";
+			case 41:
+				return "GRAVE";
+			case 42:
+				return "LEFTSHIFT";
+			case 43:
+				return "BACKSLASH";
+			case 44:
+				return "Z";
+			case 45:
+				return "X";
+			case 46:
+				return "C";
+			case 47:
+				return "V";
+			case 48:
+				return "B";
+			case 49:
+				return "N";
+			case 50:
+				return "M";
+			case 51:
+				return "COMMA";
+			case 52:
+				return "DOT";
+			case 53:
+				return "SLASH";
+			case 54:
+				return "RIGHTSHIFT";
+			case 55:
+				return "KPASTERISK";
+			case 56:
+				return "LEFTALT";
+			case 57:
+				return "SPACE";
+			case 58:
+				return "CAPSLOCK";
+			case 59:
+				return "F1";
+			case 60:
+				return "F2";
+			case 61:
+				return "F3";
+			case 62:
+				return "F4";
+			case 63:
+				return "F5";
+			case 64:
+				return "F6";
+			case 65:
+				return "F7";
+			case 66:
+				return "F8";
+			case 67:
+				return "F9";
+			case 68:
+				return "F10";
+			case 69:
+				return "NUMLOCK";
+			case 70:
+				return "SCROLLLOCK";
+			case 71:
+				return "KP7";
+			case 72:
+				return "KP8";
+			case 73:
+				return "KP9";
+			case 74:
+				return "KPMINUS";
+			case 75:
+				return "KP4";
+			case 76:
+				return "KP5";
+			case 77:
+				return "KP6";
+			case 78:
+				return "KPPLUS";
+			case 79:
+				return "KP1";
+			case 80:
+				return "KP2";
+			case 81:
+				return "KP3";
+			case 82:
+				return "KP0";
+			case 83:
+				return "KPDOT";
+			case 85:
+				return "ZENKAKUHANKAKU";
+			case 86:
+				return "102ND";
+			case 87:
+				return "F11";
+			case 88:
+				return "F12";
+			case 89:
+				return "RO";
+			case 90:
+				return "KATAKANA";
+			case 91:
+				return "HIRAGANA";
+			case 92:
+				return "HENKAN";
+			case 93:
+				return "KATAKANAHIRAGANA";
+			case 94:
+				return "MUHENKAN";
+			case 95:
+				return "KPJPCOMMA";
+			case 96:
+				return "KPENTER";
+			case 97:
+				return "RIGHTCTRL";
+			case 98:
+				return "KPSLASH";
+			case 99:
+				return "SYSRQ";
+			case 100:
+				return "RIGHTALT";
+			case 101:
+				return "LINEFEED";
+			case 102:
+				return "HOME";
+			case 103:
+				return "UP";
+			case 104:
+				return "PAGEUP";
+			case 105:
+				return "LEFT";
+			case 106:
+				return "RIGHT";
+			case 107:
+				return "END";
+			case 108:
+				return "DOWN";
+			case 109:
+				return "PAGEDOWN";
+			case 110:
+				return "INSERT";
 			case 111:
 				return "DELETE";
 			case 112:
@@ -32,16 +247,14 @@ parse(struct input_event ev)
 				return "KPPLUSMINUS";
 			case 119:
 				return "PAUSE";
-			case 120:
-				return "F21";
 			case 121:
-				return "F22";
-			case 122:
-				return "F23";
-			case 123:
-				return "F24";
-			case 124:
 				return "KPCOMMA";
+			case 122:
+				return "HANGUEL";
+			case 123:
+				return "HANJA";
+			case 124:
+				return "YEN";
 			case 125:
 				return "LEFTMETA";
 			case 126:
@@ -154,42 +367,30 @@ parse(struct input_event ev)
 				return "KPLEFTPAREN";
 			case 180:
 				return "KPRIGHTPAREN";
-			case 181:
-				return "INTL1";
-			case 182:
-				return "INTL2";
 			case 183:
-				return "INTL3";
+				return "F13";
 			case 184:
-				return "INTL4";
+				return "F14";
 			case 185:
-				return "INTL5";
+				return "F15";
 			case 186:
-				return "INTL6";
+				return "F16";
 			case 187:
-				return "INTL7";
+				return "F17";
 			case 188:
-				return "INTL8";
+				return "F18";
 			case 189:
-				return "INTL9";
+				return "F19";
 			case 190:
-				return "LANG1";
+				return "F20";
 			case 191:
-				return "LANG2";
+				return "F21";
 			case 192:
-				return "LANG3";
+				return "F22";
 			case 193:
-				return "LANG4";
+				return "F23";
 			case 194:
-				return "LANG5";
-			case 195:
-				return "LANG6";
-			case 196:
-				return "LANG7";
-			case 197:
-				return "LANG8";
-			case 198:
-				return "LANG9";
+				return "F24";
 			case 200:
 				return "PLAYCD";
 			case 201:
@@ -202,14 +403,190 @@ parse(struct input_event ev)
 				return "SUSPEND";
 			case 206:
 				return "CLOSE";
+			case 207:
+				return "PLAY";
+			case 208:
+				return "FASTFORWARD";
+			case 209:
+				return "BASSBOOST";
+			case 210:
+				return "PRINT";
+			case 211:
+				return "HP";
+			case 212:
+				return "CAMERA";
+			case 213:
+				return "SOUND";
+			case 214:
+				return "QUESTION";
+			case 215:
+				return "EMAIL";
+			case 216:
+				return "CHAT";
+			case 217:
+				return "SEARCH";
+			case 218:
+				return "CONNECT";
+			case 219:
+				return "FINANCE";
 			case 220:
-				return "UNKNOWN";
+				return "SPORT";
+			case 221:
+				return "SHOP";
+			case 222:
+				return "ALTERASE";
+			case 223:
+				return "CANCEL";
 			case 224:
 				return "BRIGHTNESSDOWN";
 			case 225:
 				return "BRIGHTNESSUP";
+			case 226:
+				return "MEDIA";
+			case 240:
+				return "UNKNOWN";
+			case 352:
+				return "OK";
+			case 353:
+				return "SELECT";
+			case 354:
+				return "GOTO";
+			case 355:
+				return "CLEAR";
+			case 356:
+				return "POWER2";
+			case 357:
+				return "OPTION";
+			case 358:
+				return "INFO";
+			case 359:
+				return "TIME";
+			case 360:
+				return "VENDOR";
+			case 361:
+				return "ARCHIVE";
+			case 362:
+				return "PROGRAM";
+			case 363:
+				return "CHANNEL";
+			case 364:
+				return "FAVORITES";
+			case 365:
+				return "EPG";
+			case 366:
+				return "PVR";
+			case 367:
+				return "MHP";
+			case 368:
+				return "LANGUAGE";
+			case 369:
+				return "TITLE";
+			case 370:
+				return "SUBTITLE";
+			case 371:
+				return "ANGLE";
+			case 372:
+				return "ZOOM";
+			case 373:
+				return "MODE";
+			case 374:
+				return "KEYBOARD";
+			case 375:
+				return "SCREEN";
+			case 376:
+				return "PC";
+			case 377:
+				return "TV";
+			case 378:
+				return "TV2";
+			case 379:
+				return "VCR";
+			case 380:
+				return "VCR2";
+			case 381:
+				return "SAT";
+			case 382:
+				return "SAT2";
+			case 383:
+				return "CD";
+			case 384:
+				return "TAPE";
+			case 385:
+				return "RADIO";
+			case 386:
+				return "TUNER";
+			case 387:
+				return "PLAYER";
+			case 388:
+				return "TEXT";
+			case 389:
+				return "DVD";
+			case 390:
+				return "AUX";
+			case 391:
+				return "MP3";
+			case 392:
+				return "AUDIO";
+			case 393:
+				return "VIDEO";
+			case 394:
+				return "DIRECTORY";
+			case 395:
+				return "LIST";
+			case 396:
+				return "MEMO";
+			case 397:
+				return "CALENDAR";
+			case 398:
+				return "RED";
+			case 399:
+				return "GREEN";
+			case 400:
+				return "YELLOW";
+			case 401:
+				return "BLUE";
+			case 402:
+				return "CHANNELUP";
+			case 403:
+				return "CHANNELDOWN";
+			case 404:
+				return "FIRST";
+			case 405:
+				return "LAST";
+			case 406:
+				return "AB";
+			case 407:
+				return "NEXT";
+			case 408:
+				return "RESTART";
+			case 409:
+				return "SLOW";
+			case 410:
+				return "SHUFFLE";
+			case 411:
+				return "BREAK";
+			case 412:
+				return "PREVIOUS";
+			case 413:
+				return "DIGITS";
+			case 414:
+				return "TEEN";
+			case 415:
+				return "TWEN";
+			case 448:
+				return "DEL_EOL";
+			case 449:
+				return "DEL_EOS";
+			case 450:
+				return "INS_LINE";
+			case 451:
+				return "DEL_LINE";
 			case 511:
 				return "MAX";
+			default:
+				if (! ret_val) ret_val = malloc (12);
+				sprintf(ret_val, "KEY_%d", ev.code);
+				return ret_val;
 
 		}
 

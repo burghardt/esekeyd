@@ -28,6 +28,7 @@ check_handlers (void)
       unsigned short int minor = 0;
       getline (&buff, &len, fp);
       sscanf (buff, "N: Number=%hu Name=%s Minor=%hu", &number, name, &minor);
+      free (buff);
       if (strncmp (name, "evdev", 5) == 0 && minor == 64)
 	{
 	  have_evdev = 1;
@@ -61,6 +62,7 @@ find_input_dev (void)
       unsigned short int number = 0;
       getline (&buff, &len, fp);
       sscanf (buff, "H: Handlers=kbd event%hu", &number);
+      free (buff);
       if (number)
 	{
 	  have_evdev = number;

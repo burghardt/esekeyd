@@ -1,3 +1,13 @@
+2004-05-15  Krzysztof Burghardt
+
+	* configure.ac: bumped to 1.2.1
+	* src/esekeyd.c, src/keytest, src/learnkeys: added
+	    option to override autodetection of input device
+	* src/Makefile.am: moved clean: to clean-local:
+	* src/input.c: check_handlers(), find_input_dev():
+	    memory leaks fixed
+	* src/mkparser.c: some improvements
+
 2004-01-24  Krzysztof Burghardt
 
 	* src/esekeyd.c: minor bugfix

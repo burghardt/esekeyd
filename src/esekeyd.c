@@ -20,17 +20,23 @@ main (int argc, char *argv[])
   unsigned short int device = 0;
   char device_name[strlen (EVENT_DEVICE)] = { 0 };
   unsigned int keycount = 0;
+  struct esekey *keys = NULL;
   unsigned int i = 0;
   FILE *funkey = NULL;
   char *key = NULL;
   struct input_event ev;
-  struct esekey *keys = NULL;
 
   printf ("%s\n", PACKAGE_STRING);
 
   if (argc < 2)
     {
-      printf ("%s: no config file given ?!\n", argv[0]);
+      printf ("\nUsage:\n");
+      printf ("%s config_file_name [input_device_name]\n", argv[0]);
+      printf ("\nconfig_file_name  - location of esekeyd config file\n");
+      printf ("input_device_name - if given turns off autodetection\n");
+      printf ("                    of 1st keyboard device\n");
+      printf ("\nExample:\n");
+      printf ("%s ~/.esekeyd.conf /dev/input/event3\n", argv[0]);
       exit (1);
     }
   else
@@ -45,7 +51,6 @@ main (int argc, char *argv[])
 	  printf ("%s: cannot open %s\n", argv[0], argv[1]);
 	  return -1;
 	}
-
 #ifdef DEBUGGER
       printf ("\n>>>> CONFIG FILE DUMP >>>>\n");
 #endif
@@ -75,6 +80,7 @@ main (int argc, char *argv[])
 #endif
 	      ++keycount;
 	    }
+	  free (buff);
 	}
 
 #ifdef DEBUGGER
@@ -91,6 +97,45 @@ main (int argc, char *argv[])
 
     }
 
+  if (argc > 2)
+    {
+      sprintf (device_name, "%s", argv[2]);
+    }
+  else
+    {
+      switch (check_handlers ())
+	{
+	case -1:
+	  printf ("%s: cannot open %s\n", argv[0], INPUT_HANDLERS);
+	  return -4;
+	case -2:
+	  printf ("%s: evdev handler not found in %s\n",
+		  argv[0], INPUT_HANDLERS);
+	  return -5;
+	}
+
+      switch (device = find_input_dev ())
+	{
+	case -1:
+	  printf ("%s: evdev for keyboard not found in %s\n",
+		  argv[0], INPUT_HANDLERS);
+	  return -6;
+	default:
+	  sprintf (device_name, "%s%hu", EVENT_DEVICE, device);
+	}
+    }
+
+  if (!(funkey = fopen (device_name, "r")))
+    {
+      printf ("%s: can`t open %s\n", argv[0], device_name);
+      return -7;
+    }
+#ifndef DEBUGGER
+  fclose (stdin);
+  fclose (stdout);
+  fclose (stderr);
+#endif
+
 #ifndef DEBUGGER
   switch (fork ())
     {
@@ -102,38 +147,6 @@ main (int argc, char *argv[])
     default:
       exit (0);
     }
-#endif
-
-  switch (check_handlers ())
-    {
-    case -1:
-      printf ("%s: cannot open %s\n", argv[0], INPUT_HANDLERS);
-      return -4;
-    case -2:
-      printf ("%s: evdev handler not found in %s\n", argv[0], INPUT_HANDLERS);
-      return -5;
-    }
-
-  switch (device = find_input_dev ())
-    {
-    case -1:
-      printf ("%s: evdev for keyboard not found in %s\n", argv[0],
-	      INPUT_HANDLERS);
-      return -6;
-    default:
-      sprintf (device_name, "%s%hu", EVENT_DEVICE, device);
-    }
-
-  if (!(funkey = fopen (device_name, "r")))
-    {
-      printf ("%s: can`t open %s\n", argv[0], device_name);
-      return -7;
-    }
-
-#ifndef DEBUGGER
-  fclose (stdin);
-  fclose (stdout);
-  fclose (stderr);
 #endif
 
   openlog ("esekeyd", LOG_PID, LOG_DAEMON);

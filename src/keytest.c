@@ -25,24 +25,34 @@ main (int argc, char *argv[])
 
   printf ("keytest (%s)\n", PACKAGE_STRING);
 
-  switch (check_handlers ())
-    {
-    case -1:
-      printf ("%s: cannot open %s\n", argv[0], INPUT_HANDLERS);
-      return -1;
-    case -2:
-      printf ("%s: evdev handler not found in %s\n", argv[0], INPUT_HANDLERS);
-      return -2;
-    }
+  printf ("\n(input device name as 1st option override autodetection)\n");
 
-  switch (device = find_input_dev ())
+  if (argc > 1)
     {
-    case -1:
-      printf ("%s: evdev for keyboard not found in %s\n", argv[0],
-	      INPUT_HANDLERS);
-      return -3;
-    default:
-      sprintf (device_name, "%s%hu", EVENT_DEVICE, device);
+      sprintf (device_name, "%s", argv[1]);
+    }
+  else
+    {
+      switch (check_handlers ())
+	{
+	case -1:
+	  printf ("%s: cannot open %s\n", argv[0], INPUT_HANDLERS);
+	  return -1;
+	case -2:
+	  printf ("%s: evdev handler not found in %s\n", argv[0],
+		  INPUT_HANDLERS);
+	  return -2;
+	}
+
+      switch (device = find_input_dev ())
+	{
+	case -1:
+	  printf ("%s: evdev for keyboard not found in %s\n", argv[0],
+		  INPUT_HANDLERS);
+	  return -3;
+	default:
+	  sprintf (device_name, "%s%hu", EVENT_DEVICE, device);
+	}
     }
 
   if (!(funkey = fopen (device_name, "r")))

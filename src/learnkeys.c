@@ -28,28 +28,42 @@ main (int argc, char *argv[])
 
   if (argc < 2)
     {
-      printf ("%s: no config file given ?!\n", argv[0]);
+      printf ("\nUsage:\n");
+      printf ("%s config_file_name [input_device_name]\n", argv[0]);
+      printf ("\nconfig_file_name  - location of esekeyd config file\n");
+      printf ("input_device_name - if given turns off autodetection\n");
+      printf ("                    of 1st keyboard device\n");
+      printf ("\nExample:\n");
+      printf ("%s ~/.esekeyd.conf /dev/input/event3\n", argv[0]);
       exit (1);
     }
 
-  switch (check_handlers ())
+  if (argc > 2)
     {
-    case -1:
-      printf ("%s: cannot open %s\n", argv[0], INPUT_HANDLERS);
-      return -1;
-    case -2:
-      printf ("%s: evdev handler not found in %s\n", argv[0], INPUT_HANDLERS);
-      return -2;
+      sprintf (device_name, "%s", argv[2]);
     }
-
-  switch (device = find_input_dev ())
+  else
     {
-    case -1:
-      printf ("%s: evdev for keyboard not found in %s\n", argv[0],
-	      INPUT_HANDLERS);
-      return -3;
-    default:
-      sprintf (device_name, "%s%hu", EVENT_DEVICE, device);
+      switch (check_handlers ())
+	{
+	case -1:
+	  printf ("%s: cannot open %s\n", argv[0], INPUT_HANDLERS);
+	  return -1;
+	case -2:
+	  printf ("%s: evdev handler not found in %s\n", argv[0],
+		  INPUT_HANDLERS);
+	  return -2;
+	}
+
+      switch (device = find_input_dev ())
+	{
+	case -1:
+	  printf ("%s: evdev for keyboard not found in %s\n", argv[0],
+		  INPUT_HANDLERS);
+	  return -3;
+	default:
+	  sprintf (device_name, "%s%hu", EVENT_DEVICE, device);
+	}
     }
 
   if (!(funkey = fopen (device_name, "r")))

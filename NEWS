@@ -3,6 +3,16 @@
  =============
 
  *******************
+ 1.2.1 (15 May 2004)
+ *******************
+
+* added option to override autodetection
+  of input device (now you can bind esekeyd
+  to your remote control input device, not
+  only 1st detected keyboard).
+* minor bugfix.
+
+ *******************
  1.2.0 (24 Jan 2004)
  *******************
 
