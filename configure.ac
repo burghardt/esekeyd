@@ -1,5 +1,5 @@
 AC_INIT([ESE Key Deamon], [1.2.0], [einstein@underground.org.pl], [esekeyd])
-#AC_PREREQ([2.57])
+dnl AC_PREREQ([2.57])
 AC_CONFIG_AUX_DIR(build)
 AC_CONFIG_SRCDIR(src/esekeyd.c)
 AM_CONFIG_HEADER(config.h)
@@ -9,23 +9,24 @@ if test "$CFLAGS"; then
  CFLAGS_CUSTOM=yes
 fi
 
-# Checks for programs.
+dnl Checks for programs.
 AC_PROG_CC
+AC_PROG_RANLIB
 
-# Checks for header files.
+dnl Checks for header files.
 AC_CHECK_HEADERS(stdio.h stdlib.h unistd.h fcntl.h syslog.h string.h \
 sys/types.h sys/stat.h linux/input.h)
 
-# Check for getopt_long in standard library
-#AC_CHECK_FUNCS(getopt_long,, [AC_LIBOBJ(getopt)
-#                              AC_LIBOBJ(getopt1)])
+dnl Check for getopt_long in standard library
+AC_CHECK_FUNCS(getopt_long,, [AC_LIBOBJ(getopt)
+                              AC_LIBOBJ(getopt1)])
 
-# Checks for library functions.
+dnl Checks for library functions.
 AC_CHECK_FUNCS(fprintf exit system fork \
 syslog openlog closelog \
 fopen feof fread fclose \
 open read close)
-#AC_CHECK_LIB(socket, socket)
+dnl AC_CHECK_LIB(socket, socket)
 
 dnl Use option --enable-gcc-debug to enable GCC debug code. 
 AC_ARG_ENABLE(gcc-debug,
@@ -47,6 +48,7 @@ else
 fi
 
 AC_CONFIG_FILES([Makefile
+ lib/Makefile
  examples/Makefile
  old/Makefile
  src/Makefile
