@@ -1,0 +1,16 @@
+Source: esekeyd
+Section: misc
+Priority: optional
+Maintainer: Krzysztof Burghardt <einstein@underground.org.pl>
+Build-Depends: debhelper (>= 4.0.0)
+Standards-Version: 3.6.0
+
+Package: esekeyd
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Multimedia keyboard driver for Linux
+ ESE Key Daemon is a multimedia keyboard driver for Linux.
+ With the 2.6 kernel series it can also handle remote controls,
+ as they are presented as keyboards. No kernel patch is required.
+ It is a userspace program that pools /dev/input/event?
+ interfaces for incoming keyboard key presses.
