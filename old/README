@@ -1,0 +1,6 @@
+THIS IS _OLD_ VERSION FOR 2.2 / 2.4 WITH FUNKEY KERNEL PATCH
+[ BUT NOT FOR /dev/input !!! ]
+
+funkey.sh IS DEPRECATED!
+(due to design changes in daemon it was replaced
+by config file witch is much better idea)

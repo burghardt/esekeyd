@@ -1,0 +1,15 @@
+
+ Release Notes
+ =============
+
+ *******************
+ 1.2.0 (24 Jan 2004)
+ *******************
+
+* most code of esekeyd rewriten.
+* rewritten using autoconf, automake and autoheader.
+* added two new programs keytest and learnkeys.
+* added support for config files.
+* removed funkey.sh (replaced by config file).
+* added support for all keys form <linux/input.h>.
+* minor bugfix.

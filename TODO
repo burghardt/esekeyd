@@ -1,0 +1,9 @@
+
+ TO DO
+ =====
+
+* write manpages, infopages and good install instruction
+* add more config files ready for use with diffrent keyboards(?)
+* multiusers support (?)
+* pam module for secure /dev/input/* handling (pam_console?)
+  and respawn deamon when user login on console

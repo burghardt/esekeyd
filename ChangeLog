@@ -1,0 +1,20 @@
+2004-01-24  Krzysztof Burghardt
+
+	* src/esekeyd.c: minor bugfix
+
+2004-01-11  Krzysztof Burghardt
+
+	* src/esekeyd.c: added support for config file
+	* src/esekeyd.c: removed function check_handlers()
+	    and find_input_dev()
+	* src/input.c: moved two common functions
+	* src/mkparser.c: added
+	* src/keytest.c: added
+	* src/learnkeys.c: added
+	* src/parser.c: dynamicaly generated from <linux/input.h>
+	* README: updated
+
+2004-01-10  Krzysztof Burghardt
+
+	* configure.ac: bumped to 1.2.0
+	* src/esekeyd.c: minor bugfix
