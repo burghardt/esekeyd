@@ -1,12 +1,26 @@
-This package was debianized by Krzysztof Burghardt <einstein@underground.org.pl> on
-Sun, 18 Jul 2004 16:01:43 +0200.
+This is esekeyd, written and maintained by Krzysztof Burghardt <krzysztof.burghardt@wp.pl>
+on Tue,  3 Jan 2006 22:47:33 +0100.
 
-It was downloaded from http://www.underground.org.pl/einstein/
+The original source can always be found at:
+	ftp://ftp.debian.org/dists/unstable/main/source/
 
-Upstream Author: Krzysztof Burghardt <einstein@underground.org.pl>
+Copyright (C) 2005  Krzysztof Burghardt
 
-Copyright:
-This software is protected by GNU GPL license.
+License:
 
-On Debian systems, the complete text of the GNU Library
-General Public License can be found in `/usr/share/common-licenses/LGPL'.
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this package; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
+
+On Debian systems, the complete text of the GNU General
+Public License can be found in `/usr/share/common-licenses/GPL'.

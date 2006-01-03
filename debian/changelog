@@ -1,6 +1,5 @@
-esekeyd (1.2.1-1) unstable; urgency=low
+esekeyd (1.2.2) unstable; urgency=low
 
   * Initial Release.
 
- -- Krzysztof Burghardt <einstein@underground.org.pl>  Sun, 18 Jul 2004 16:01:43 +0200
-
+ -- Krzysztof Burghardt <krzysztof.burghardt@wp.pl>  Tue,  3 Jan 2006 22:47:33 +0100

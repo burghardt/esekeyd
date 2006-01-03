@@ -1,9 +1,9 @@
 Source: esekeyd
-Section: misc
+Section: unknown
 Priority: optional
-Maintainer: Krzysztof Burghardt <einstein@underground.org.pl>
-Build-Depends: debhelper (>= 4.0.0)
-Standards-Version: 3.6.0
+Maintainer: Krzysztof Burghardt <krzysztof.burghardt@wp.pl>
+Build-Depends: debhelper (>= 4.0.0), autotools-dev
+Standards-Version: 3.6.2
 
 Package: esekeyd
 Architecture: any
