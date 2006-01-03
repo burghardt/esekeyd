@@ -443,6 +443,14 @@ parse(struct input_event ev)
 				return "BRIGHTNESSUP";
 			case 226:
 				return "MEDIA";
+			case 227:
+				return "SWITCHVIDEOMODE";
+			case 228:
+				return "KBDILLUMTOGGLE";
+			case 229:
+				return "KBDILLUMDOWN";
+			case 230:
+				return "KBDILLUMUP";
 			case 240:
 				return "UNKNOWN";
 			case 352:
@@ -581,6 +589,48 @@ parse(struct input_event ev)
 				return "INS_LINE";
 			case 451:
 				return "DEL_LINE";
+			case 464:
+				return "FN";
+			case 465:
+				return "FN_ESC";
+			case 466:
+				return "FN_F1";
+			case 467:
+				return "FN_F2";
+			case 468:
+				return "FN_F3";
+			case 469:
+				return "FN_F4";
+			case 470:
+				return "FN_F5";
+			case 471:
+				return "FN_F6";
+			case 472:
+				return "FN_F7";
+			case 473:
+				return "FN_F8";
+			case 474:
+				return "FN_F9";
+			case 475:
+				return "FN_F10";
+			case 476:
+				return "FN_F11";
+			case 477:
+				return "FN_F12";
+			case 478:
+				return "FN_1";
+			case 479:
+				return "FN_2";
+			case 480:
+				return "FN_D";
+			case 481:
+				return "FN_E";
+			case 482:
+				return "FN_F";
+			case 483:
+				return "FN_S";
+			case 484:
+				return "FN_B";
 			case 511:
 				return "MAX";
 			default:

@@ -1,5 +1,4 @@
-#AUTOMAKE_OPTIONS = 1.7.5 readme-alpha
-SUBDIRS = lib src examples old
+SUBDIRS = lib src examples old debian
 
 indent:
 	(cd src; make indent)

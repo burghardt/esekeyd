@@ -1,5 +1,3 @@
-#AUTOMAKE_OPTIONS = 1.7.5 readme-alpha
-
 noinst_LIBRARIES = libcommon.a
 
 libcommon_a_SOURCES = 

@@ -1,5 +1,4 @@
-AC_INIT([ESE Key Deamon], [1.2.2], [einstein@underground.org.pl], [esekeyd])
-dnl AC_PREREQ([2.57])
+AC_INIT([ESE Key Deamon], [1.2.2], [krzysztof.burghardt@wp.pl], [esekeyd])
 AC_CONFIG_AUX_DIR(build)
 AC_CONFIG_SRCDIR(src/esekeyd.c)
 AM_CONFIG_HEADER(config.h)
@@ -52,5 +51,6 @@ AC_CONFIG_FILES([Makefile
  examples/Makefile
  old/Makefile
  src/Makefile
+ debian/Makefile
  ])
 AC_OUTPUT
