@@ -51,6 +51,7 @@ AC_CONFIG_FILES([Makefile
  examples/Makefile
  old/Makefile
  src/Makefile
+ doc/Makefile
  debian/Makefile
  ])
 AC_OUTPUT

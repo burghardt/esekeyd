@@ -25,14 +25,14 @@ main (int argc, char *argv[])
 
   printf ("keytest (%s)\n", PACKAGE_STRING);
 
-  printf ("\n(input device name as 1st option override autodetection)\n");
-
   if (argc > 1)
     {
       sprintf (device_name, "%s", argv[1]);
     }
   else
     {
+      printf ("\n(input device name as 1st option override autodetection)\n");
+
       switch (check_handlers ())
 	{
 	case -1:

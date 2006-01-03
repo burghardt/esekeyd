@@ -48,7 +48,7 @@ signed char
 find_input_dev (void)
 {
   FILE *fp = 0;
-  signed char have_evdev = 0;
+  signed char have_evdev = -2;
 
   fp = fopen (INPUT_DEVICES, "r");
 
@@ -59,11 +59,11 @@ find_input_dev (void)
     {
       char *buff = 0;
       size_t len = 0;
-      unsigned short int number = 0;
+      short int number = -2;
       getline (&buff, &len, fp);
       sscanf (buff, "H: Handlers=kbd event%hu", &number);
       free (buff);
-      if (number)
+      if (number > -1)
 	{
 	  have_evdev = number;
 	  break;
@@ -71,9 +71,6 @@ find_input_dev (void)
     }
 
   fclose (fp);
-
-  if (!have_evdev)
-    return -2;
 
   return have_evdev;
 }

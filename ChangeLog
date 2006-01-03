@@ -1,3 +1,8 @@
+2006-01-04  Krzysztof Burghardt
+
+	* src/input.c: find_input_dev(): fixed bug causes
+	    find_input_dev() omits event0
+
 2004-05-15  Krzysztof Burghardt
 
 	* configure.ac: bumped to 1.2.1
