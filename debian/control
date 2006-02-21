@@ -1,5 +1,5 @@
 Source: esekeyd
-Section: unknown
+Section: misc
 Priority: optional
 Maintainer: Krzysztof Burghardt <krzysztof.burghardt@wp.pl>
 Build-Depends: debhelper (>= 4.0.0), autotools-dev
