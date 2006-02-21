@@ -1,7 +1,9 @@
 /*
  * esekey.h --- ESE Key Daemon --- Keycode Daemon for Funny/Function Keys.
  *
- * (c) 2004 Krzysztof Burghardt.
+ * $Id: esekey.h,v 1.2 2006-02-21 21:37:29 kb Exp $
+ *
+ * (c) 2004,2006 Krzysztof Burghardt.
  *
  * Released under the GNU Public License.
  */
@@ -15,12 +17,14 @@
 #include <unistd.h>
 #include <string.h>
 #include <syslog.h>
+#include <signal.h>
 #include <linux/input.h>
 #include "../config.h"
 
 #define INPUT_HANDLERS "/proc/bus/input/handlers"
 #define INPUT_DEVICES "/proc/bus/input/devices"
 #define EVENT_DEVICE "/dev/input/event"
+#define PID_FILE "/var/run/esekeyd.pid"
 
 struct esekey
 {

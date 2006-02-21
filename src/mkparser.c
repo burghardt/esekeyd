@@ -1,6 +1,8 @@
 /*
  * mkparser.c --- Make Parser for ESE Key Daemon
  *
+ * $Id: mkparser.c,v 1.3 2006-02-21 21:37:29 kb Exp $
+ *
  * (c) 2004 Krzysztof Burghardt.
  *
  * Released under the GNU Public License.
@@ -21,7 +23,7 @@ main (int argc, char *argv[])
 {
   char name[128];
   int value = 0;
-  char *buff = 0;
+  char *buff = NULL;
   size_t len = 0;
 
   FILE *fp = fopen (argv[1], "r");

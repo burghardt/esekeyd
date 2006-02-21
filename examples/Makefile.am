@@ -1,1 +1,1 @@
-EXTRA_DIST = example.conf
+EXTRA_DIST = example.conf esekeyd.gentoo

@@ -3,46 +3,109 @@
  *
  * Taps /dev/input/event<number> and starts the required action for that keycode.
  *
+ * $Id: esekeyd.c,v 1.3 2006-02-21 21:37:29 kb Exp $
+ *
  * Based on code from funky.c released under the GNU Public License
  * by Rick van Rein.
  *
  * (c) 2000 Rick van Rein.
- * (c) 2002-2004 Krzysztof Burghardt.
+ * (c) 2002-2004,2006 Krzysztof Burghardt.
  *
  * Released under the GNU Public License.
  */
 
 #include "esekey.h"
 
+FILE *funkey = NULL;
+char *pid_name = NULL;
+
+void cleanup ()
+{
+  closelog ();
+  fclose (funkey);
+  unlink (pid_name);
+}
+
+void signal_handler (int x)
+{
+  syslog (LOG_NOTICE, "caught signal %d, exiting...", x);
+  cleanup ();
+  exit(x);
+}
+
+void register_signal_handlers (void)
+{
+  signal (SIGHUP,  signal_handler);
+  signal (SIGINT,  signal_handler);
+  signal (SIGQUIT, signal_handler);
+  signal (SIGILL,  signal_handler);
+  signal (SIGTRAP, signal_handler);
+  signal (SIGABRT, signal_handler);
+  signal (SIGIOT,  signal_handler);
+  signal (SIGFPE,  signal_handler);
+  signal (SIGKILL, signal_handler);
+  signal (SIGSEGV, signal_handler);
+  signal (SIGPIPE, signal_handler);
+  signal (SIGTERM, signal_handler);
+  signal (SIGSTOP, signal_handler);
+  signal (SIGUSR1, SIG_IGN);
+}
+
 int
 main (int argc, char *argv[])
 {
-  unsigned short int device = 0;
+  short int device = 0;
   char device_name[strlen (EVENT_DEVICE)] = { 0 };
   unsigned int keycount = 0;
   struct esekey *keys = NULL;
   unsigned int i = 0;
-  FILE *funkey = NULL;
   char *key = NULL;
   struct input_event ev;
+  FILE *pid_fp = NULL;
+  pid_t pid = 0;
 
   printf ("%s\n", PACKAGE_STRING);
+
+  if (argc > 3)
+    pid_name = strdup(argv[3]);
+  else
+    pid_name = strdup(PID_FILE);
+
+  /* check to see if a copy of ESE Key Daemon is already running */
+  if (!access(pid_name, R_OK))
+    {
+      if ((pid_fp = fopen(pid_name, "r" )))
+        {
+	  fscanf(pid_fp, "%d", &pid);
+	  fclose(pid_fp);
+	  
+	  if (kill(pid, SIGUSR1)==0)
+	    {
+	      fprintf(stderr, "esekeyd: alread running as process %d.\n", pid);
+	      exit(-1);
+	    }
+
+          unlink(pid_name);
+	}
+    }
 
   if (argc < 2)
     {
       printf ("\nUsage:\n");
-      printf ("%s config_file_name [input_device_name]\n", argv[0]);
-      printf ("\nconfig_file_name  - location of esekeyd config file\n");
-      printf ("input_device_name - if given turns off autodetection\n");
-      printf ("                    of 1st keyboard device\n");
+      printf ("%s config_file_name [input_device_name] [pidfile_name]\n", argv[0]);
+      printf ("\nconfig_file_name - location of esekeyd config file\n");
+      printf ("input_device_name  - input (event) device; if given turns off\n");
+      printf ("                      autodetection of 1st keyboard device\n");
+      printf ("pidfile_name       - location of esekeyd pidfile;\n");
+      printf ("                      default is %s\n", PID_FILE);
       printf ("\nExample:\n");
-      printf ("%s ~/.esekeyd.conf /dev/input/event3\n", argv[0]);
+      printf ("%s ~/.esekeyd.conf /dev/input/event3 /var/run/esekeyd.event3.pid\n", argv[0]);
       exit (1);
     }
   else
     {
 
-      FILE *fp = 0;
+      FILE *fp = NULL;
 
       fp = fopen (argv[1], "r");
 
@@ -57,7 +120,7 @@ main (int argc, char *argv[])
 
       while (!feof (fp))
 	{
-	  char *buff = 0;
+	  char *buff = NULL;
 	  size_t len = 0;
 	  getline (&buff, &len, fp);
 	  if (buff[0] >= 65 && buff[0] <= 90)
@@ -136,21 +199,32 @@ main (int argc, char *argv[])
   fclose (stderr);
 #endif
 
+  register_signal_handlers();
+  
+  openlog ("esekeyd", LOG_PID, LOG_DAEMON);
+  syslog (LOG_NOTICE, "started key daemon for %s", device_name);
+
 #ifndef DEBUGGER
-  switch (fork ())
+  switch (pid = fork ())
     {
     case -1:
-      printf ("%s: fork() error", argv[0]);
+      syslog (LOG_NOTICE, "fork() error");
       exit (-3);
     case 0:
       break;
     default:
+      /* create the pid file */
+      if ((pid_fp = fopen(pid_name, "w")))
+        {
+	  fprintf(pid_fp, "%d\n", pid);
+	  fclose(pid_fp);
+	}
+       else
+        syslog (LOG_NOTICE, "fail to create %s", pid_name);
+
       exit (0);
     }
 #endif
-
-  openlog ("esekeyd", LOG_PID, LOG_DAEMON);
-  syslog (LOG_NOTICE, "started key daemon for %s", device_name);
 
   while (fread (&ev, sizeof (struct input_event), 1, funkey))
     {
@@ -174,9 +248,7 @@ main (int argc, char *argv[])
 
     }
 
-  closelog ();
-
-  fclose (funkey);
+  cleanup();
 
   return 0;
 

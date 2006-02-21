@@ -3,6 +3,16 @@
  =============
 
  *******************
+ 1.2.2 (?? Feb 2006)
+ *******************
+
+* Debianization.
+* signal handling for daemon.
+* support for /var/run/esekeyd.pid file.
+* added Gentoo init.d script.
+* added man pages.
+
+ *******************
  1.2.1 (15 May 2004)
  *******************
 

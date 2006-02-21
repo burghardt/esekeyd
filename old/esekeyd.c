@@ -3,6 +3,8 @@
  *
  * Taps /dev/funkey and starts the required action for that keycode.
  *
+ * $Id: esekeyd.c,v 1.2 2006-02-21 21:37:29 kb Exp $
+ *
  * Based on code from funky.c released under the GNU Public License
  * by Rick van Rein.
  *

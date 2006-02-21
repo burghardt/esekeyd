@@ -3,6 +3,8 @@
  *
  * Taps /dev/input/event<number> and makes config file for ESE Key Daemon.
  *
+ * $Id: learnkeys.c,v 1.3 2006-02-21 21:37:29 kb Exp $
+ *
  * Based on code from funky.c released under the GNU Public License
  * by Rick van Rein.
  *
@@ -14,14 +16,46 @@
 
 #include "esekey.h"
 
+FILE *funkey = NULL;
+FILE *config = NULL;
+
+void cleanup ()
+{
+  fclose (funkey);
+  fclose (config);
+}
+
+void signal_handler (int x)
+{
+  printf ("\nCaught signal %d, writing config file and exiting...\n", x);
+  cleanup ();
+  exit(x);
+}
+
+void register_signal_handlers (void)
+{
+  signal (SIGHUP,  signal_handler);
+  signal (SIGINT,  signal_handler);
+  signal (SIGQUIT, signal_handler);
+  signal (SIGILL,  signal_handler);
+  signal (SIGTRAP, signal_handler);
+  signal (SIGABRT, signal_handler);
+  signal (SIGIOT,  signal_handler);
+  signal (SIGFPE,  signal_handler);
+  signal (SIGKILL, signal_handler);
+  signal (SIGSEGV, signal_handler);
+  signal (SIGPIPE, signal_handler);
+  signal (SIGTERM, signal_handler);
+  signal (SIGSTOP, signal_handler);
+  signal (SIGUSR1, SIG_IGN);
+}
+
 int
 main (int argc, char *argv[])
 {
-  unsigned short int device = 0;
+  short int device = 0;
   char device_name[strlen (EVENT_DEVICE)] = { 0 };
-  FILE *funkey = 0;
-  FILE *config = 0;
-  char *key = 0;
+  char *key = NULL;
   struct input_event ev;
 
   printf ("learnkeys (%s)\n", PACKAGE_STRING);
@@ -84,7 +118,9 @@ main (int argc, char *argv[])
   fprintf (config, "#          so the command line will be as follows:\n");
   fprintf (config, "#MAIL:/bin/sh -c \"DISPLAY=:0 xterm -e mutt\"\n#\n\n");
 
-  printf ("\nPres ANY (fun)key... or ENTER to exit...\n\n");
+  printf ("\nPres ANY (fun)key... or Ctrl-C to exit...\n\n");
+  
+  register_signal_handlers();
 
   while (fread (&ev, sizeof (struct input_event), 1, funkey))
     {
@@ -108,8 +144,7 @@ main (int argc, char *argv[])
 
     }
 
-  fclose (funkey);
-  fclose (config);
+  cleanup ();
 
   return 0;
 

@@ -1,7 +1,9 @@
 /*
  * input.c --- ESE Key Daemon --- Keycode Daemon for Funny/Function Keys.
  *
- * (c) 2002-2004 Krzysztof Burghardt.
+ * $Id: input.c,v 1.4 2006-02-21 21:37:29 kb Exp $
+ *
+ * (c) 2002-2004,2006 Krzysztof Burghardt.
  *
  * Released under the GNU Public License.
  */
@@ -11,7 +13,7 @@
 signed char
 check_handlers (void)
 {
-  FILE *fp = 0;
+  FILE *fp = NULL;
   signed char have_evdev = 0;
 
   fp = fopen (INPUT_HANDLERS, "r");
@@ -22,7 +24,7 @@ check_handlers (void)
   while (!feof (fp))
     {
       char name[128];
-      char *buff = 0;
+      char *buff = NULL;
       size_t len = 0;
       unsigned short int number = 0;
       unsigned short int minor = 0;
@@ -47,7 +49,7 @@ check_handlers (void)
 signed char
 find_input_dev (void)
 {
-  FILE *fp = 0;
+  FILE *fp = NULL;
   signed char have_evdev = -2;
 
   fp = fopen (INPUT_DEVICES, "r");
@@ -57,7 +59,7 @@ find_input_dev (void)
 
   while (!feof (fp))
     {
-      char *buff = 0;
+      char *buff = NULL;
       size_t len = 0;
       short int number = -2;
       getline (&buff, &len, fp);
