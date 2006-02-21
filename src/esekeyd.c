@@ -3,7 +3,7 @@
  *
  * Taps /dev/input/event<number> and starts the required action for that keycode.
  *
- * $Id: esekeyd.c,v 1.3 2006-02-21 21:37:29 kb Exp $
+ * $Id: esekeyd.c,v 1.4 2006-02-21 22:37:59 kb Exp $
  *
  * Based on code from funky.c released under the GNU Public License
  * by Rick van Rein.
@@ -92,12 +92,12 @@ main (int argc, char *argv[])
   if (argc < 2)
     {
       printf ("\nUsage:\n");
-      printf ("%s config_file_name [input_device_name] [pidfile_name]\n", argv[0]);
-      printf ("\nconfig_file_name - location of esekeyd config file\n");
-      printf ("input_device_name  - input (event) device; if given turns off\n");
-      printf ("                      autodetection of 1st keyboard device\n");
-      printf ("pidfile_name       - location of esekeyd pidfile;\n");
-      printf ("                      default is %s\n", PID_FILE);
+      printf ("%s config_file_name [input_device_name] [pidfile_name]\n\n", argv[0]);
+      printf ("config_file_name  - location of esekeyd config file\n");
+      printf ("input_device_name - input (event) device; if given turns off\n");
+      printf ("                     autodetection of 1st keyboard device\n");
+      printf ("pidfile_name      - location of esekeyd pidfile;\n");
+      printf ("                     default is %s\n", PID_FILE);
       printf ("\nExample:\n");
       printf ("%s ~/.esekeyd.conf /dev/input/event3 /var/run/esekeyd.event3.pid\n", argv[0]);
       exit (1);

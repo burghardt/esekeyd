@@ -1,27 +1,36 @@
-.\" learnkeys.1 --
+.\" esekeyd.1 --
 .\"
 .\" Copyright (c) 2006 Krzysztof Burghardt
 .\"
-.TH learnkeys 1 "21 Feb 2006" "Linux Utilities" "Linux Manual"
+.TH esekeyd 1 "21 Feb 2006" "Linux Utilities" "Linux Manual"
 .SH NAME
-learnkeys \- config file generator
+esekeyd \- ESE Key Daemon is a multimedia keyboard driver for Linux
 .SH SYNOPSIS
-.BI "learnkeys config_file_name [input_device_name]"
+.BI "esekeyd config_file_name [input_device_name] [pidfile_name]"
 .SH DESCRIPTION
-.B learnkeys
+.B esekeyd
 ESE Key Daemon is a multimedia keyboard driver for Linux.
 With the 2.6 kernel series it can also handle remote controls,
 as they are presented as keyboards. No kernel patch is required.
 It is a userspace program that pools /dev/input/event?
 interfaces for incoming keyboard key presses.
+.SS
+Features:
+.HP
+- No kernel patch need,
+.HP
+- Supports keyboards, mices and remote controls,
 .SH OPTIONS
 Options:
 .TP
 .B config_file_name
-location of learnkeys config file
+location of esekeyd config file
 .TP
 .B input_device_name
 input (event) device; if given turns off autodetection of 1st keyboard device
+.TP
+.B pidfile_name
+location of esekeyd pidfile; default is /var/run/esekeyd.pid
 .SH FILES
 .HP
 .I /usr/sbin/esekeyd
@@ -36,8 +45,8 @@ input (event) device; if given turns off autodetection of 1st keyboard device
 .I /usr/man/man1/{esekeyd,keytest,learnkeys}.1(.gz)
 - manual pages
 .SH "SEE ALSO"
-.BR esekeyd (1),
-.BR keytest (1)
+.BR keytest (1),
+.BR learnkeys (1)
 .SH BUGS
 See the file TODO in the distribution for information on what
 remains to be done.
@@ -46,7 +55,7 @@ If you want to report a problem with the program, please send mail to
 this address: <krzysztof.burghardt@wp.pl>.
 .PP
 Provide a detailed description of the bug, the version of the program
-you are running (run learnkeys without any parameters to display this information),
+you are running (run esekeyd without any parameters to display this information),
 the operating system you are running the program on and
 if the program crashes, I would appreciate a stack trace.
 .SH AUTHOR

@@ -3,7 +3,7 @@
  *
  * Taps /dev/input/event<number> and makes config file for ESE Key Daemon.
  *
- * $Id: learnkeys.c,v 1.3 2006-02-21 21:37:29 kb Exp $
+ * $Id: learnkeys.c,v 1.4 2006-02-21 22:37:59 kb Exp $
  *
  * Based on code from funky.c released under the GNU Public License
  * by Rick van Rein.
@@ -63,9 +63,9 @@ main (int argc, char *argv[])
   if (argc < 2)
     {
       printf ("\nUsage:\n");
-      printf ("%s config_file_name [input_device_name]\n", argv[0]);
-      printf ("\nconfig_file_name  - location of esekeyd config file\n");
-      printf ("input_device_name - if given turns off autodetection\n");
+      printf ("%s config_file_name [input_device_name]\n\n", argv[0]);
+      printf ("config_file_name  - location of esekeyd config file\n");
+      printf ("input_device_name - input (event) device; if given turns off\n");
       printf ("                    of 1st keyboard device\n");
       printf ("\nExample:\n");
       printf ("%s ~/.esekeyd.conf /dev/input/event3\n", argv[0]);

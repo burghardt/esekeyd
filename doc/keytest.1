@@ -1,0 +1,53 @@
+.\" keytest.1 --
+.\"
+.\" Copyright (c) 2006 Krzysztof Burghardt
+.\"
+.TH keytest 1 "21 Feb 2006" "Linux Utilities" "Linux Manual"
+.SH NAME
+keytest \- reports names of pressed keys
+.SH SYNOPSIS
+.BI "keytest [input_device_name]"
+.SH DESCRIPTION
+.B keytest
+ESE Key Daemon is a multimedia keyboard driver for Linux.
+With the 2.6 kernel series it can also handle remote controls,
+as they are presented as keyboards. No kernel patch is required.
+It is a userspace program that pools /dev/input/event?
+interfaces for incoming keyboard key presses.
+.SH OPTIONS
+Options:
+.TP
+.B input_device_name
+input (event) device; if given turns off autodetection of 1st keyboard device
+.SH FILES
+.HP
+.I /usr/sbin/esekeyd
+- main binary (daemon)
+.HP
+.I /usr/bin/keytest
+- program that reports names of pressed keys
+.HP
+.I /usr/bin/learnkeys
+- config file generator
+.HP
+.I /usr/man/man1/{esekeyd,keytest,learnkeys}.1(.gz)
+- manual pages
+.SH "SEE ALSO"
+.BR esekeyd (1),
+.BR learnkeys (1)
+.SH BUGS
+See the file TODO in the distribution for information on what
+remains to be done.
+.PP
+If you want to report a problem with the program, please send mail to
+this address: <krzysztof.burghardt@wp.pl>.
+.PP
+Provide a detailed description of the bug, the version of the program
+you are running (run keytest without any parameters to display this information),
+the operating system you are running the program on and
+if the program crashes, I would appreciate a stack trace.
+.SH AUTHOR
+This program was written by Krzysztof Burghardt
+<krzysztof.burghardt@wp.pl> and may be freely
+distributed under the terms of the GNU General Public License.
+There is ABSOLUTELY NO WARRANTY for this program.
