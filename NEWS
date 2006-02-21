@@ -9,7 +9,7 @@
 * Debianization.
 * signal handling for daemon.
 * support for /var/run/esekeyd.pid file.
-* added Gentoo init.d script.
+* added Gentoo initscript.
 * added man pages.
 
  *******************
