@@ -1,7 +1,7 @@
 Source: esekeyd
 Section: misc
 Priority: optional
-Maintainer: Krzysztof Burghardt <krzysztof.burghardt@wp.pl>
+Maintainer: Krzysztof Burghardt <krzysztof@burghardt.pl>
 Build-Depends: debhelper (>= 4.0.0), autotools-dev
 Standards-Version: 3.6.2
 

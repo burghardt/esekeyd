@@ -3,7 +3,7 @@
  *
  * Taps /dev/input/event<number> and starts the required action for that keycode.
  *
- * $Id: esekeyd.c,v 1.4 2006-02-21 22:37:59 kb Exp $
+ * $Id: esekeyd.c,v 1.5 2006-06-01 20:32:18 kb Exp $
  *
  * Based on code from funky.c released under the GNU Public License
  * by Rick van Rein.
@@ -65,11 +65,7 @@ main (int argc, char *argv[])
   pid_t pid = 0;
 
   printf ("%s\n", PACKAGE_STRING);
-
-  if (argc > 3)
-    pid_name = strdup(argv[3]);
-  else
-    pid_name = strdup(PID_FILE);
+  pid_name = (argc > 3) ? strdup(argv[3]) : strdup(PID_FILE);
 
   /* check to see if a copy of ESE Key Daemon is already running */
   if (!access(pid_name, R_OK))
@@ -104,11 +100,11 @@ main (int argc, char *argv[])
     }
   else
     {
-
       FILE *fp = NULL;
-
+      char *buff = NULL;
+      size_t len = 0;
+      ssize_t read;
       fp = fopen (argv[1], "r");
-
       if (!fp)
 	{
 	  printf ("%s: cannot open %s\n", argv[0], argv[1]);
@@ -118,23 +114,15 @@ main (int argc, char *argv[])
       printf ("\n>>>> CONFIG FILE DUMP >>>>\n");
 #endif
 
-      while (!feof (fp))
+  while ((read =getline(&buff, &len, fp)) != -1)
 	{
-	  char *buff = NULL;
-	  size_t len = 0;
-	  getline (&buff, &len, fp);
 	  if (buff[0] >= 65 && buff[0] <= 90)
 	    {
 
 	      buff[strlen (buff) - 1] = '\0';
-	      keys =
-		(struct esekey *) realloc (keys,
-					   (keycount +
-					    1) * sizeof (struct esekey));
-
+	      keys = (struct esekey *) realloc (keys, (keycount +1) * sizeof (struct esekey));
 	      keys[keycount].command = strdup (strchr (buff, ':') + 1);
-	      keys[keycount].name =
-		(char *) malloc (strchr (buff, ':') - buff + 1);
+	      keys[keycount].name = (char *) malloc (strchr (buff, ':') - buff + 1);
 	      strncpy (keys[keycount].name, buff, strchr (buff, ':') - buff);
 	      keys[keycount].name[strchr (buff, ':') - buff] = '\0';
 #ifdef DEBUGGER
@@ -143,8 +131,8 @@ main (int argc, char *argv[])
 #endif
 	      ++keycount;
 	    }
-	  free (buff);
 	}
+	free (buff);
 
 #ifdef DEBUGGER
       printf ("<<<< CONFIG FILE DUMP <<<<\n\n");

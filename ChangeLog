@@ -1,3 +1,7 @@
+2006-06-01  Krzysztof Burghardt
+
+	* src/esekeyd.c: main(): fixed bug causes SIGSEGV
+
 2006-01-04  Krzysztof Burghardt
 
 	* src/input.c: find_input_dev(): fixed bug causes

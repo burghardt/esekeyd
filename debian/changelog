@@ -1,3 +1,9 @@
+esekeyd (1.2.3) unstable; urgency=low
+
+  * New upstream release
+
+ -- Krzysztof Burghardt <krzysztof@burghardt.pl>  Thu,  1 Jun 2006 22:27:22 +0200
+
 esekeyd (1.2.2) unstable; urgency=low
 
   * Initial Release.
