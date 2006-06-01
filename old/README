@@ -3,4 +3,4 @@ THIS IS _OLD_ VERSION FOR 2.2 / 2.4 WITH FUNKEY KERNEL PATCH
 
 funkey.sh IS DEPRECATED!
 (due to design changes in daemon it was replaced
-by config file witch is much better idea)
+by config file which is much better idea)
