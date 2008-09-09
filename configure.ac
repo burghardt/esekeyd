@@ -12,6 +12,12 @@ dnl Checks for programs.
 AC_PROG_CC
 AC_PROG_RANLIB
 
+if test x"$cross_compiling" = xyes; then
+    AC_CHECK_PROGS(CC_FOR_BUILD, gcc cc)
+else
+    CC_FOR_BUILD="$CC"
+fi
+
 dnl Checks for header files.
 AC_CHECK_HEADERS(stdio.h stdlib.h unistd.h fcntl.h syslog.h string.h \
 sys/types.h sys/stat.h linux/input.h)
