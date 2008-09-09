@@ -250,7 +250,7 @@ parse(struct input_event ev)
 			case 121:
 				return "KPCOMMA";
 			case 122:
-				return "HANGUEL";
+				return "HANGEUL";
 			case 123:
 				return "HANJA";
 			case 124:
@@ -367,6 +367,10 @@ parse(struct input_event ev)
 				return "KPLEFTPAREN";
 			case 180:
 				return "KPRIGHTPAREN";
+			case 181:
+				return "NEW";
+			case 182:
+				return "REDO";
 			case 183:
 				return "F13";
 			case 184:
@@ -451,8 +455,38 @@ parse(struct input_event ev)
 				return "KBDILLUMDOWN";
 			case 230:
 				return "KBDILLUMUP";
+			case 231:
+				return "SEND";
+			case 232:
+				return "REPLY";
+			case 233:
+				return "FORWARDMAIL";
+			case 234:
+				return "SAVE";
+			case 235:
+				return "DOCUMENTS";
+			case 236:
+				return "BATTERY";
+			case 237:
+				return "BLUETOOTH";
+			case 238:
+				return "WLAN";
+			case 239:
+				return "UWB";
 			case 240:
 				return "UNKNOWN";
+			case 241:
+				return "VIDEO_NEXT";
+			case 242:
+				return "VIDEO_PREV";
+			case 243:
+				return "BRIGHTNESS_CYCLE";
+			case 244:
+				return "BRIGHTNESS_ZERO";
+			case 245:
+				return "DISPLAY_OFF";
+			case 246:
+				return "WIMAX";
 			case 352:
 				return "OK";
 			case 353:
@@ -581,6 +615,54 @@ parse(struct input_event ev)
 				return "TEEN";
 			case 415:
 				return "TWEN";
+			case 416:
+				return "VIDEOPHONE";
+			case 417:
+				return "GAMES";
+			case 418:
+				return "ZOOMIN";
+			case 419:
+				return "ZOOMOUT";
+			case 420:
+				return "ZOOMRESET";
+			case 421:
+				return "WORDPROCESSOR";
+			case 422:
+				return "EDITOR";
+			case 423:
+				return "SPREADSHEET";
+			case 424:
+				return "GRAPHICSEDITOR";
+			case 425:
+				return "PRESENTATION";
+			case 426:
+				return "DATABASE";
+			case 427:
+				return "NEWS";
+			case 428:
+				return "VOICEMAIL";
+			case 429:
+				return "ADDRESSBOOK";
+			case 430:
+				return "MESSENGER";
+			case 431:
+				return "DISPLAYTOGGLE";
+			case 432:
+				return "SPELLCHECK";
+			case 433:
+				return "LOGOFF";
+			case 434:
+				return "DOLLAR";
+			case 435:
+				return "EURO";
+			case 436:
+				return "FRAMEBACK";
+			case 437:
+				return "FRAMEFORWARD";
+			case 438:
+				return "CONTEXT_MENU";
+			case 439:
+				return "MEDIA_REPEAT";
 			case 448:
 				return "DEL_EOL";
 			case 449:
@@ -631,6 +713,26 @@ parse(struct input_event ev)
 				return "FN_S";
 			case 484:
 				return "FN_B";
+			case 497:
+				return "BRL_DOT1";
+			case 498:
+				return "BRL_DOT2";
+			case 499:
+				return "BRL_DOT3";
+			case 500:
+				return "BRL_DOT4";
+			case 501:
+				return "BRL_DOT5";
+			case 502:
+				return "BRL_DOT6";
+			case 503:
+				return "BRL_DOT7";
+			case 504:
+				return "BRL_DOT8";
+			case 505:
+				return "BRL_DOT9";
+			case 506:
+				return "BRL_DOT10";
 			case 511:
 				return "MAX";
 			default:
