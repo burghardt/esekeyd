@@ -1,4 +1,4 @@
-SUBDIRS = lib src examples old doc debian
+SUBDIRS = src doc examples
 
 indent:
 	(cd src; make indent)

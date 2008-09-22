@@ -3,10 +3,20 @@
  =============
 
  *******************
+ 1.2.4 (22 Sep 2008)
+ *******************
+
+* Fixed cross-compilation bug reported by ***FIXME***.
+* Removed debian directory (will try to include esekeyd in Debian).
+* Removed old directory (2.4 users can use 1.2.3, but 2.4 support
+  is no longer maintained).
+* Removed lib directory (any modern (g)libc has getopt).
+
+ *******************
  1.2.3 (01 Jun 2006)
  *******************
 
-* Fixed bug reported by Евгений Вдовин
+* Fixed bug reported by Евгений Вдовин.
 
  *******************
  1.2.2 (21 Feb 2006)
@@ -22,10 +32,8 @@
  1.2.1 (15 May 2004)
  *******************
 
-* added option to override autodetection
-  of input device (now you can bind esekeyd
-  to your remote control input device, not
-  only 1st detected keyboard).
+* added option to override autodetection of input device (now you can bind
+  esekeyd to your remote control input device, not only 1st detected keyboard).
 * minor bugfix.
 
  *******************

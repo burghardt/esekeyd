@@ -20,18 +20,13 @@ fi
 
 dnl Checks for header files.
 AC_CHECK_HEADERS(stdio.h stdlib.h unistd.h fcntl.h syslog.h string.h \
-sys/types.h sys/stat.h linux/input.h)
-
-dnl Check for getopt_long in standard library
-AC_CHECK_FUNCS(getopt_long,, [AC_LIBOBJ(getopt)
-                              AC_LIBOBJ(getopt1)])
+getopt.h sys/types.h sys/stat.h linux/input.h)
 
 dnl Checks for library functions.
 AC_CHECK_FUNCS(fprintf exit system fork \
 syslog openlog closelog \
 fopen feof fread fclose \
-open read close)
-dnl AC_CHECK_LIB(socket, socket)
+open read close getopt_long)
 
 dnl Use option --enable-gcc-debug to enable GCC debug code. 
 AC_ARG_ENABLE(gcc-debug,
@@ -53,11 +48,8 @@ else
 fi
 
 AC_CONFIG_FILES([Makefile
- lib/Makefile
- examples/Makefile
- old/Makefile
  src/Makefile
  doc/Makefile
- debian/Makefile
+ examples/Makefile
  ])
 AC_OUTPUT
