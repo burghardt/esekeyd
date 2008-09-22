@@ -8,7 +8,7 @@
 
 * Fixed cross-compilation bug reported by ***FIXME***.
 * Removed debian directory (will try to include esekeyd in Debian).
-* Removed old directory (2.4 users can use 1.2.3, but 2.4 support
+* Removed old directory (Linux 2.4 users can use 1.2.3, but 2.4 support
   is no longer maintained).
 * Removed lib directory (any modern (g)libc has getopt).
 

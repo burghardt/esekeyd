@@ -19,7 +19,3 @@ parser.c: mkparser /usr/include/linux/input.h
 
 clean-local:
 	rm -f parser.c
-
-indent:
-	indent *.c *.h
-	rm -f *~
