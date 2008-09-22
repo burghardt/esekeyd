@@ -1,4 +1,0 @@
-# Defaults for esekeyd initscript
-
-# Daemon options, at last config location must be present
-DAEMON_OPTS=/etc/esekeyd.conf
