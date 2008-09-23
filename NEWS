@@ -3,10 +3,10 @@
  =============
 
  *******************
- 1.2.4 (22 Sep 2008)
+ 1.2.4 (23 Sep 2008)
  *******************
 
-* Fixed cross-compilation bug reported by ***FIXME***.
+* Fixed cross-compilation bug reported by hartleys.
 * Removed debian directory (will try to include esekeyd in Debian).
 * Removed old directory (Linux 2.4 users can use 1.2.3, but 2.4 support
   is no longer maintained).
