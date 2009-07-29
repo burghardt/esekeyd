@@ -1,41 +1,47 @@
+2009-07-29  Krzysztof Burghardt
+
+    * src/{esekeyd,keytest,learnkeys}.c: use dynamic memory allocation
+        for device_name variable
+    * src/*: sources was re-formated to clean up mix of spaces and tabs
+
 2008-09-22  Krzysztof Burghardt
 
-	* configure.ac, src/Makefile.am: use buildcc for building mkparser
+    * configure.ac, src/Makefile.am: use buildcc for building mkparser
 
 2006-06-01  Krzysztof Burghardt
 
-	* src/esekeyd.c: main(): fixed bug causes SIGSEGV
+    * src/esekeyd.c: main(): fixed bug causes SIGSEGV
 
 2006-01-04  Krzysztof Burghardt
 
-	* src/input.c: find_input_dev(): fixed bug causes find_input_dev()
-	    omits event0
+    * src/input.c: find_input_dev(): fixed bug causes find_input_dev()
+        omits event0
 
 2004-05-15  Krzysztof Burghardt
 
-	* configure.ac: bumped to 1.2.1
-	* src/esekeyd.c, src/keytest, src/learnkeys: added option to override
-	    autodetection of input device
-	* src/Makefile.am: moved clean: to clean-local:
-	* src/input.c: check_handlers(), find_input_dev():  memory leaks fixed
-	* src/mkparser.c: some improvements
+    * configure.ac: bumped to 1.2.1
+    * src/esekeyd.c, src/keytest, src/learnkeys: added option to override
+        autodetection of input device
+    * src/Makefile.am: moved clean: to clean-local:
+    * src/input.c: check_handlers(), find_input_dev():  memory leaks fixed
+    * src/mkparser.c: some improvements
 
 2004-01-24  Krzysztof Burghardt
 
-	* src/esekeyd.c: minor bugfix
+    * src/esekeyd.c: minor bugfix
 
 2004-01-11  Krzysztof Burghardt
 
-	* src/esekeyd.c: added support for config file
-	* src/esekeyd.c: removed function check_handlers() and find_input_dev()
-	* src/input.c: moved two common functions
-	* src/mkparser.c: added
-	* src/keytest.c: added
-	* src/learnkeys.c: added
-	* src/parser.c: dynamicaly generated from <linux/input.h>
-	* README: updated
+    * src/esekeyd.c: added support for config file
+    * src/esekeyd.c: removed function check_handlers() and find_input_dev()
+    * src/input.c: moved two common functions
+    * src/mkparser.c: added
+    * src/keytest.c: added
+    * src/learnkeys.c: added
+    * src/parser.c: dynamicaly generated from <linux/input.h>
+    * README: updated
 
 2004-01-10  Krzysztof Burghardt
 
-	* configure.ac: bumped to 1.2.0
-	* src/esekeyd.c: minor bugfix
+    * configure.ac: bumped to 1.2.0
+    * src/esekeyd.c: minor bugfix

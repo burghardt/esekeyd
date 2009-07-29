@@ -1,7 +1,7 @@
 /*
  * esekey.h --- ESE Key Daemon --- Keycode Daemon for Funny/Function Keys.
  *
- * $Id: esekey.h,v 1.2 2006-02-21 21:37:29 kb Exp $
+ * $Id$
  *
  * (c) 2004,2006 Krzysztof Burghardt.
  *
@@ -28,8 +28,8 @@
 
 struct esekey
 {
-  char *name;
-  char *command;
+    char *name;
+    char *command;
 };
 
 signed char check_handlers (void);
