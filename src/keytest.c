@@ -59,7 +59,7 @@ int main (int argc, char *argv[])
 
     if (argc > 1)
     {
-        device_name = argv[2];
+        device_name = argv[1];
     }
     else
     {
