@@ -36,34 +36,30 @@ int main (int argc, char *argv[])
     printf ("char*\n");
     printf ("parse(struct input_event ev)\n");
     printf ("{\n");
-    printf ("\tstatic char *ret_val;\n\n");
-    printf ("\tif (ev.type == EV_KEY && ev.value == 1) {\n\n");
-    printf ("\t\tswitch (ev.code) {\n\n");
-
-    //  printf ("\t\t\t/* Keys with keykodes < 111 are useless for Funkey\n");
-    //  printf ("\t\t\t   because they are present on all keyboards\n");
-    //  printf ("\t\t\t   (e.g. letters, numbers, ENTER, SHIFT, other) */\n\n");
+    printf ("    static char *ret_val;\n\n");
+    printf ("    if (ev.type == EV_KEY && ev.value == 1) {\n\n");
+    printf ("        switch (ev.code) {\n\n");
 
     while (!feof (fp))
     {
         getline (&buff, &len, fp);
         sscanf (buff, "#define KEY_%s %i", name, &value);
-        if (value != 0 /* && value > 110 */ )
+        if (value)
         {
-            printf ("\t\t\tcase %i:\n", value);
-            printf ("\t\t\t\treturn \"%s\";\n", name);
+            printf ("            case %i:\n", value);
+            printf ("                return \"%s\";\n", name);
             value = 0;
         }
     }
 
-    printf ("\t\t\tdefault:\n");
-    printf ("\t\t\t\tif (! ret_val) ret_val = malloc (12);\n");
-    printf ("\t\t\t\tsprintf(ret_val, \"KEY_%%d\", ev.code);\n");
-    printf ("\t\t\t\treturn ret_val;\n");
+    printf ("            default:\n");
+    printf ("                if (!ret_val) ret_val = malloc (12);\n");
+    printf ("                sprintf(ret_val, \"KEY_%%d\", ev.code);\n");
+    printf ("                return ret_val;\n");
 
-    printf ("\n\t\t}\n\n");
-    printf ("\t}\n\n");
-    printf ("\treturn NULL;\n\n");
+    printf ("\n        }\n\n");
+    printf ("    }\n\n");
+    printf ("    return NULL;\n\n");
     printf ("}\n");
     printf ("\n");
 
