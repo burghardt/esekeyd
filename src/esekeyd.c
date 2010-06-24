@@ -113,12 +113,19 @@ int main (int argc, char *argv[])
         printf ("\n>>>> CONFIG FILE DUMP >>>>\n");
 #endif
 
-        while ((read =getline(&buff, &len, fp)) != -1)
+        while ((read = getline(&buff, &len, fp)) != -1)
         {
             if ((buff[0] >= 48 && buff[0] <= 57) || (buff[0] >= 65 && buff[0] <= 90))
             {
+                // remove newline and whitespaces from end of string
+                while (read && buff[read - 1] <= 32)
+                {
+                    --read;
+                }
+                if (!read)
+                    continue;
+                buff[read] = '\0';
 
-                buff[strlen (buff) - 1] = '\0';
                 keys = (struct esekey *) realloc (keys, (keycount +1) * sizeof (struct esekey));
                 keys[keycount].command = strdup (strchr (buff, ':') + 1);
                 keys[keycount].name = (char *) malloc (strchr (buff, ':') - buff + 1);
