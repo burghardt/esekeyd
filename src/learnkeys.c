@@ -57,7 +57,7 @@ int main (int argc, char *argv[])
     char *key = NULL;
     struct input_event ev;
 
-    printf ("learnkeys (%s)\n", PACKAGE_STRING);
+    printf ("learnkeys (%s, %s)\n", PACKAGE_STRING, PACKAGE_VERSION_SVN_REV);
 
     if (argc < 2)
     {

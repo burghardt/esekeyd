@@ -1,8 +1,9 @@
-AC_INIT([ESE Key Deamon], [1.2.6], [krzysztof@burghardt.pl], [esekeyd])
+AC_INIT([ESE Key Deamon], [1.2.7], [krzysztof@burghardt.pl], [esekeyd])
 AC_CONFIG_AUX_DIR(build)
 AC_CONFIG_SRCDIR(src/esekeyd.c)
 AM_CONFIG_HEADER(config.h)
 AM_INIT_AUTOMAKE
+AM_CONDITIONAL([DOT_SVN], [test -f .svn/entries])
 
 if test "$CFLAGS"; then
  CFLAGS_CUSTOM=yes

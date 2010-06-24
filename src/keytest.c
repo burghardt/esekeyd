@@ -55,7 +55,7 @@ int main (int argc, char *argv[])
     char *key = NULL;
     struct input_event ev;
 
-    printf ("keytest (%s)\n", PACKAGE_STRING);
+    printf ("keytest (%s, %s)\n", PACKAGE_STRING, PACKAGE_VERSION_SVN_REV);
 
     if (argc > 1)
     {

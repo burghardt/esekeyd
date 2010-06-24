@@ -19,6 +19,7 @@
 #include <syslog.h>
 #include <signal.h>
 #include <linux/input.h>
+#include "../version.h"
 #include "../config.h"
 
 #define INPUT_HANDLERS "/proc/bus/input/handlers"

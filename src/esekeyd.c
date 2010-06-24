@@ -63,7 +63,7 @@ int main (int argc, char *argv[])
     FILE *pid_fp = NULL;
     pid_t pid = 0;
 
-    printf ("%s\n", PACKAGE_STRING);
+    printf ("%s (%s)\n", PACKAGE_STRING, PACKAGE_VERSION_SVN_REV);
     pid_name = (argc > 3) ? strdup(argv[3]) : strdup(PID_FILE);
 
     /* check to see if a copy of ESE Key Daemon is already running */
