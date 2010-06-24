@@ -3,6 +3,15 @@
  =============
 
  *******************
+ 1.2.7 (?? Jun 2010)
+ *******************
+
+* Fix that allow numeric keys in configuration by Jiri Pinkava
+* Fix to problem when there is no newline on last line in config file by Jiri
+  Pinkava
+* New feature allow handle both key press and releases by Jiri Pinkava
+
+ *******************
  1.2.6 (29 Jul 2009)
  *******************
 

@@ -1,3 +1,10 @@
+2010-06-21  Jiri Pinkava
+
+    * src/esekeyd.c: main(): fixed numeric keys configuration and problem when
+        there is no newline on last line in config file
+    * src/{esekeyd.c,mkparser.c,learnkeys.c,esekey.h}: allow handle both key
+        press and releases
+
 2009-07-29  Krzysztof Burghardt
 
     * src/{esekeyd,keytest,learnkeys}.c: use dynamic memory allocation
