@@ -115,7 +115,7 @@ int main (int argc, char *argv[])
 
         while ((read =getline(&buff, &len, fp)) != -1)
         {
-            if (buff[0] >= 65 && buff[0] <= 90)
+            if ((buff[0] >= 48 && buff[0] <= 57) || (buff[0] >= 65 && buff[0] <= 90))
             {
 
                 buff[strlen (buff) - 1] = '\0';
