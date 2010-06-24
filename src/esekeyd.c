@@ -126,11 +126,30 @@ int main (int argc, char *argv[])
                     continue;
                 buff[read] = '\0';
 
+                char *separator;
+
                 keys = (struct esekey *) realloc (keys, (keycount +1) * sizeof (struct esekey));
-                keys[keycount].command = strdup (strchr (buff, ':') + 1);
-                keys[keycount].name = (char *) malloc (strchr (buff, ':') - buff + 1);
-                strncpy (keys[keycount].name, buff, strchr (buff, ':') - buff);
-                keys[keycount].name[strchr (buff, ':') - buff] = '\0';
+                separator = strchr(buff, ':');
+                keys[keycount].command = (char *) malloc (read - (separator - buff));
+                memcpy (keys[keycount].command, separator + 1, read - (separator - buff));
+                separator[0] = '\0';
+                keys[keycount].value = 1;
+                if (strchr(buff, '('))
+                {
+                    separator = strchr(buff, '(');
+                    if (!strcmp(separator, "(release)")) {
+                        keys[keycount].value = 0;
+                    } else {
+                        if (strcmp(separator, "(press)")) 
+                        {
+                            printf ("%s: error (press) or (release) expected\n", separator);
+                            return -1;
+                        }
+                    }
+                    separator[0] = '\0';
+                }
+                keys[keycount].name = (char *) malloc (separator - buff + 1);
+                memcpy (keys[keycount].name, buff, separator - buff + 1);
 #ifdef DEBUGGER
                 printf ("%s <-*-> %s\n", keys[keycount].name,
                         keys[keycount].command);
@@ -227,7 +246,7 @@ int main (int argc, char *argv[])
         {
             for (i = 0; i < keycount; ++i)
             {
-                if (strcmp (key, keys[i].name) == 0)
+                if (strcmp (key, keys[i].name) == 0 && ev.value == keys[i].value)
                 {
 #ifdef DEBUGGER
 #warning DEBUGGER defined - esekeyd will NOT run any command in DEBUG MODE

@@ -37,7 +37,7 @@ int main (int argc, char *argv[])
     printf ("parse(struct input_event ev)\n");
     printf ("{\n");
     printf ("    static char *ret_val;\n\n");
-    printf ("    if (ev.type == EV_KEY && ev.value == 1) {\n\n");
+    printf ("    if (ev.type == EV_KEY) {\n\n");
     printf ("        switch (ev.code) {\n\n");
 
     while (!feof (fp))

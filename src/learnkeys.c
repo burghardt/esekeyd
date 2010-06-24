@@ -137,7 +137,10 @@ int main (int argc, char *argv[])
         {
 
             printf ("key %s stored in config file\n", key);
-            fprintf (config, "#%s:\n", key);
+            if (ev.value == 1)
+                fprintf (config, "#%s(press):\n", key);
+            else
+                fprintf (config, "#%s(release):\n", key);
 
         }
 

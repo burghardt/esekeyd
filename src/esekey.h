@@ -29,6 +29,7 @@
 struct esekey
 {
     char *name;
+    int value;
     char *command;
 };
 
