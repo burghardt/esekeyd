@@ -1,3 +1,9 @@
+2010-07-03  Jiri Pinkava
+
+    * README: minor clarification
+    * examples/example.conf, src/learnkeys.c: documented optional field event
+        type, if not defined press is assumed as default
+
 2010-06-21  Jiri Pinkava
 
     * src/esekeyd.c: main(): fixed numeric keys configuration and problem when
