@@ -111,11 +111,21 @@ int main (int argc, char *argv[])
         return -5;
     }
 
-    fprintf (config, "#\n# %s config file\n#\n\n", PACKAGE_STRING);
-    fprintf (config,
-            "#\n# example: to run mutt in xterm we must set DISPLAY\n");
-    fprintf (config, "#          so the command line will be as follows:\n");
-    fprintf (config, "#MAIL:/bin/sh -c \"DISPLAY=:0 xterm -e mutt\"\n#\n\n");
+    fprintf (config, 
+"#\n"
+"# %s config file\n"
+"#\n"
+"\n"
+"#\n"
+"# example 1: to run mutt in xterm we must set DISPLAY\n"
+"#            so the command line will be as follows:\n"
+"#MAIL:/bin/sh -c \"DISPLAY=:0 xterm -e mutt\"\n"
+"#\n"
+"# example 2: turn on/off GPS reciever when lid is open/closed\n"
+"#RADIO(press):echo 1 >/sys/device/platform/gps/gps_power\n"
+"#RADIO(release):echo 0 >/sys/device/platform/gps/gps_power\n"
+"#\n"
+"\n", PACKAGE_STRING);
 
     printf ("\nPres ANY (fun)key... or Ctrl-C to exit...\n\n");
 

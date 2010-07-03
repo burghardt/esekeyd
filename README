@@ -4,7 +4,7 @@ about Funkey patch. (at the end of file)
 
 How to use this program?
 
-1. Compile kernel with input support.
+1. Compile kernel with event interface input support.
 (generic kernels should have it)
 
 1a. If compiled as a module (best choice) load module.
