@@ -125,6 +125,9 @@ int main (int argc, char *argv[])
 "#RADIO(press):echo 1 >/sys/device/platform/gps/gps_power\n"
 "#RADIO(release):echo 0 >/sys/device/platform/gps/gps_power\n"
 "#\n"
+"# example 3: run nautilus when both left meta and e keys are press\n"
+"#LEFTMETA+E:nautilus\n"
+"#\n"
 "\n", PACKAGE_STRING);
 
     printf ("\nPres ANY (fun)key... or Ctrl-C to exit...\n\n");

@@ -1,3 +1,9 @@
+2010-07-04  Krzysztof Burghardt
+
+    * src/esekeyd.c, src/esekey.h: add support for multiple keys
+        sequences/combinations e.g. LEFTMETA+E:nautilus
+    * examples/example.conf, src/learnkeys.c: documented multiple keys
+
 2010-07-03  Jiri Pinkava
 
     * README: minor clarification
