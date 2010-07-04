@@ -121,7 +121,7 @@ int main (int argc, char *argv[])
 "#            so the command line will be as follows:\n"
 "#MAIL:/bin/sh -c \"DISPLAY=:0 xterm -e mutt\"\n"
 "#\n"
-"# example 2: turn on/off GPS reciever when lid is open/closed\n"
+"# example 2: turn on/off GPS receiver when lid is open/closed\n"
 "#RADIO(press):echo 1 >/sys/device/platform/gps/gps_power\n"
 "#RADIO(release):echo 0 >/sys/device/platform/gps/gps_power\n"
 "#\n"
