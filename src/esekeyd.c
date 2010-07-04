@@ -15,15 +15,60 @@
  */
 
 #include "esekey.h"
+#include <pthread.h>
 
 FILE *funkey = NULL;
 char *pid_name = NULL;
+struct esekey *keys = NULL;
+unsigned int keycount = 0;
+char *keys_buff = NULL;
+pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 
 void cleanup ()
 {
     closelog ();
     fclose (funkey);
     unlink (pid_name);
+}
+
+void delayed_execution (int x)
+{
+    unsigned int i = 0;
+    struct itimerval itime;
+
+    itime.it_interval.tv_sec = 0;
+    itime.it_interval.tv_usec = 0;
+    itime.it_value = itime.it_interval;
+    setitimer (ITIMER_REAL, &itime, NULL);
+
+    pthread_mutex_lock(&mutex);
+
+#ifdef DEBUGGER
+    printf ("[delayed] %s\n", keys_buff);
+#endif
+
+    if (strstr (keys_buff, KEY_SEPARATOR)) // only one key, it should be already processed
+    {
+
+        for (i = 0; i < keycount; ++i) // run command for key press
+        {
+            if (strcmp (keys_buff, keys[i].name) == 0)
+            {
+#ifdef DEBUGGER
+#warning DEBUGGER defined - esekeyd will NOT run any command in DEBUG MODE
+                printf ("[delayed] %s <-*-> %s\n", keys[i].name, keys[i].command);
+#else
+                system (keys[i].command);
+#endif
+            }
+        }
+
+    }
+
+    free(keys_buff);
+    keys_buff = NULL;
+
+    pthread_mutex_unlock(&mutex);
 }
 
 void signal_handler (int x)
@@ -35,6 +80,7 @@ void signal_handler (int x)
 
 void register_signal_handlers (void)
 {
+    signal (SIGALRM, delayed_execution);
     signal (SIGHUP,  signal_handler);
     signal (SIGINT,  signal_handler);
     signal (SIGQUIT, signal_handler);
@@ -55,8 +101,6 @@ int main (int argc, char *argv[])
 {
     short int device = 0;
     char *device_name = NULL;
-    unsigned int keycount = 0;
-    struct esekey *keys = NULL;
     unsigned int i = 0;
     char *key = NULL;
     struct input_event ev;
@@ -140,7 +184,7 @@ int main (int argc, char *argv[])
                     if (!strcmp(separator, "(release)")) {
                         keys[keycount].value = 0;
                     } else {
-                        if (strcmp(separator, "(press)")) 
+                        if (strcmp(separator, "(press)"))
                         {
                             printf ("%s: error (press) or (release) expected\n", separator);
                             return -1;
@@ -244,7 +288,34 @@ int main (int argc, char *argv[])
 
         if ((key = parse (ev)) != NULL)
         {
-            for (i = 0; i < keycount; ++i)
+            if (ev.value) // prepare keys combination for delayed execute
+            {             // (this is done only for press event type)
+                pthread_mutex_lock(&mutex);
+
+                if (keys_buff)
+                {
+                    size_t key_size = strlen (key);
+                    keys_buff = realloc (keys_buff, strlen(keys_buff)
+                            + key_size + 2); // for KEY_SEPARATOR and \0
+                    strcat (keys_buff, KEY_SEPARATOR);
+                    strncat (keys_buff, key, key_size);
+                }
+                else
+                {
+                    struct itimerval itime;
+
+                    asprintf (&keys_buff, "%s", key);
+
+                    itime.it_interval.tv_sec = 0;
+                    itime.it_interval.tv_usec = KEYS_DELAY;
+                    itime.it_value = itime.it_interval;
+                    setitimer (ITIMER_REAL, &itime, NULL);
+                }
+
+                pthread_mutex_unlock(&mutex);
+            }
+
+            for (i = 0; i < keycount; ++i) // run command for each key event
             {
                 if (strcmp (key, keys[i].name) == 0 && ev.value == keys[i].value)
                 {
@@ -256,7 +327,6 @@ int main (int argc, char *argv[])
 #endif
                 }
             }
-
         }
 
     }

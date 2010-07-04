@@ -26,6 +26,8 @@
 #define INPUT_DEVICES "/proc/bus/input/devices"
 #define EVENT_DEVICE "/dev/input/event"
 #define PID_FILE "/var/run/esekeyd.pid"
+#define KEY_SEPARATOR "+"
+#define KEYS_DELAY 300000
 
 struct esekey
 {
