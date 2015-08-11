@@ -4,6 +4,7 @@ AC_CONFIG_SRCDIR(src/esekeyd.c)
 AM_CONFIG_HEADER(config.h)
 AM_INIT_AUTOMAKE
 AM_CONDITIONAL([DOT_SVN], [test -f .svn/entries])
+AM_CONDITIONAL([DOT_GIT], [test -f .git/index])
 
 if test "$CFLAGS"; then
  CFLAGS_CUSTOM=yes
