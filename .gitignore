@@ -1,0 +1,13 @@
+INSTALL
+Makefile
+aclocal.m4
+configure
+doc/Makefile
+examples/Makefile
+src/Makefile
+src/esekeyd
+src/keytest
+src/learnkeys
+src/mkparser
+src/parser.c
+version.h
