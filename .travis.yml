@@ -10,7 +10,11 @@ compiler:
     - clang
     - gcc
 
-before_script: ./bootstrap
+before_script:
+    - ./bootstrap
+
+after_success:
+    - bash <(curl -s https://codecov.io/bash)
 
 addons:
     coverity_scan:
