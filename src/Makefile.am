@@ -8,7 +8,7 @@ esekeyd_SOURCES = esekeyd.c input.c parser.c esekey.h
 noinst_PROGRAMS = mkparser
 mkparser_SOURCES = mkparser.c
 
-mkparser: $(mkparser_SOURCES)
+mkparser$(EXEEXT): $(mkparser_SOURCES)
 	$(CC_FOR_BUILD) -o $@ $(mkparser_SOURCES)
 
 parser.c: mkparser /usr/include/linux/input.h
