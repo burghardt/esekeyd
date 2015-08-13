@@ -18,3 +18,6 @@ endif
 
 clean-local:
 	rm -f version.h
+
+test:
+	true
