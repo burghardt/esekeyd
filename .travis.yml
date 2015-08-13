@@ -1,3 +1,7 @@
+env:
+    global:
+        - secure: "48S1KrEguLoEOQU4rNCDachmBhnGPKEFjdL/w3BY+ZbAgb77Ogub0nkrVXEDqc9lGeW38euHSL2WnPb3e/ZRiY8FwfmVZaPTZYftKOACXd3uIE3EnXBIZqwYnlJkw3JacLcpB7kiHOlqXzSeVcVFsN1KGS2MZqUi6SBIBZUDa5xL+/1H45bvZNwbVpq9YlHUp2PzXUbN2BwY/nG84KhWX5eGRYlqSq/nxK1YmVm/dMNjihAmV2sslVO+XiubN22ymG/bZYkwsYpDdF7ufOVIyZZ2S2DvIal5DMeoA3rmY0i3g8XJfmZXPZoX0ZeYj21C1n8dEZjYZlVhGrwTFXJaKdSPf5Cw60voEaAvujuODZjsOhM9GNAswK8rgsb5WHmg+PQw2P+V4QqT7mymwmpoxVN5gsdawDTEjBctsQwr5/5aoPKUBkLh1FceOQoDUr2Kv5vyifjI0vyqKSkzUKsm+O+9jQzeyUacfi9gct6M+MjMvrqTOPRJkPUS41DRTabCKIH+VfOI2EiG0Ttp10j1KIb7SR99VjatzNO2TObk79satcqIE0NfvCdi9D9fq2MGn+5ES8bqkpIKJInXaTCmmrxYR13nf/DSF+fdbqHzTbwQUHQRc/tkDxzrFUUjPIiGjs12dQtPN4Piw4RQWnmAT4+5urEae7X/t/L3P3+ZvXc="
+
 language: c
 
 os: linux
@@ -7,3 +11,13 @@ compiler:
     - gcc
 
 before_script: ./bootstrap
+
+addons:
+    coverity_scan:
+        project:
+            name: "burghardt/esekeyd"
+            description: "Build submitted via Travis CI"
+        notification_email: krzysztof@burghardt.pl
+        build_command_prepend: "./bootstrap ; ./configure ; make clean"
+        build_command: "make -j 4"
+        branch_pattern: coverity_scan
