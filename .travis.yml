@@ -5,3 +5,5 @@ os: linux
 compiler:
     - clang
     - gcc
+
+before_script: ./bootstrap
