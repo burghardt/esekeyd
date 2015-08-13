@@ -1,0 +1,6 @@
+test:
+    override:
+        - ./bootstrap
+        - ./configure
+        - make
+        - make test
