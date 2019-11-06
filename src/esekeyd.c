@@ -60,7 +60,10 @@ void delayed_execution (int x)
 #warning DEBUGGER defined - esekeyd will NOT run any command in DEBUG MODE
                 printf ("[delayed] %s <-*-> %s\n", keys[i].name, keys[i].command);
 #else
-                system (keys[i].command);
+                if (system (keys[i].command) != 0) {
+                    syslog (LOG_ERR, "unable to execute '%s' command",
+                            keys[i].command);
+                }
 #endif
             }
         }
@@ -117,13 +120,16 @@ int main (int argc, char *argv[])
     {
         if ((pid_fp = fopen(pid_name, "r" )))
         {
-            fscanf(pid_fp, "%d", &pid);
+            if (fscanf(pid_fp, "%d", &pid) < 0) {
+                fprintf(stderr, "esekeyd: unable to read pid from %s.\n", pid_name);
+                exit(-1);
+            }
             fclose(pid_fp);
 
             if (kill(pid, SIGUSR1)==0)
             {
                 fprintf(stderr, "esekeyd: already running as process %d.\n", pid);
-                exit(-1);
+                exit(-2);
             }
 
             unlink(pid_name);
@@ -243,14 +249,15 @@ int main (int argc, char *argv[])
                         argv[0], INPUT_HANDLERS);
                 return -6;
             default:
-                asprintf (&device_name, "%s%hu", EVENT_DEVICE, device);
+                if (asprintf (&device_name, "%s%hu", EVENT_DEVICE, device) < 0)
+                    return -7;
         }
     }
 
     if (!(funkey = fopen (device_name, "r")))
     {
         printf ("%s: can`t open %s\n", argv[0], device_name);
-        return -7;
+        return -8;
     }
 #ifndef DEBUGGER
     fclose (stdin);
@@ -306,7 +313,10 @@ int main (int argc, char *argv[])
                 {
                     struct itimerval itime;
 
-                    asprintf (&keys_buff, "%s", key);
+                    if (asprintf (&keys_buff, "%s", key) < 0) {
+                        syslog (LOG_ERR, "unable to allocate memory");
+                        return -9;
+                    }
 
                     itime.it_interval.tv_sec = 0;
                     itime.it_interval.tv_usec = KEYS_DELAY;
@@ -325,7 +335,10 @@ int main (int argc, char *argv[])
 #warning DEBUGGER defined - esekeyd will NOT run any command in DEBUG MODE
                     printf ("%s <-*-> %s\n", keys[i].name, keys[i].command);
 #else
-                    system (keys[i].command);
+                if (system (keys[i].command) != 0) {
+                    syslog (LOG_ERR, "unable to execute '%s' command",
+                            keys[i].command);
+                }
 #endif
                 }
             }

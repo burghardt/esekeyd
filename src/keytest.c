@@ -83,14 +83,17 @@ int main (int argc, char *argv[])
                         INPUT_HANDLERS);
                 return -3;
             default:
-                asprintf (&device_name, "%s%hu", EVENT_DEVICE, device);
+                if (asprintf (&device_name, "%s%hu", EVENT_DEVICE, device) < 0) {
+                    printf ("%s: unable to allocate memory", argv[0]);
+                    return -4;
+                }
         }
     }
 
     if (!(funkey = fopen (device_name, "r")))
     {
         printf ("%s: can`t open %s\n", argv[0], device_name);
-        return -4;
+        return -5;
     }
 
     printf ("\nPres ANY (fun)key... or Ctrl-C to exit...\n\n");
