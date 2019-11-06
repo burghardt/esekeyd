@@ -5,9 +5,7 @@ ESE Key Daemon is a multimedia keyboard driver for Linux.
 
 [![Travis-CI](https://travis-ci.org/burghardt/esekeyd.svg?branch=master)](https://travis-ci.org/burghardt/esekeyd/)
 [![CircleCI](https://circleci.com/gh/burghardt/esekeyd/tree/master.svg?style=svg)](https://circleci.com/gh/burghardt/esekeyd)
-[![Drone.IO](https://drone.io/github.com/burghardt/esekeyd/status.png)](https://drone.io/github.com/burghardt/esekeyd)
 [![Coverity](https://scan.coverity.com/projects/6006/badge.svg)](https://scan.coverity.com/projects/6006)
-[![CodeCov](http://codecov.io/github/burghardt/esekeyd/coverage.svg?branch=master)](http://codecov.io/github/burghardt/esekeyd/)
 
 How to use this program?
 ------------------------
