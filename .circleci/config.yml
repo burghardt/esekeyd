@@ -1,0 +1,29 @@
+version: 2.0
+
+jobs:
+  build:
+    docker:
+      - image: archlinux/base:latest
+    steps:
+      - checkout
+      - run:
+          name: pacman
+          command: pacman -Syu --noconfirm base-devel
+      - run:
+          name: bootstrap
+          command: ./bootstrap
+      - run:
+          name: configure
+          command: ./configure
+      - run:
+          name: make
+          command: make -j
+      - run:
+          name: install
+          command: make install
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
