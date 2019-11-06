@@ -36,6 +36,8 @@ void delayed_execution (int x)
     unsigned int i = 0;
     struct itimerval itime;
 
+    (void) x;
+
     itime.it_interval.tv_sec = 0;
     itime.it_interval.tv_usec = 0;
     itime.it_value = itime.it_interval;
@@ -298,7 +300,7 @@ int main (int argc, char *argv[])
                     keys_buff = realloc (keys_buff, strlen(keys_buff)
                             + key_size + 2); // for KEY_SEPARATOR and \0
                     strcat (keys_buff, KEY_SEPARATOR);
-                    strncat (keys_buff, key, key_size);
+                    strncat (keys_buff, key, key_size + 1);
                 }
                 else
                 {
