@@ -5,16 +5,27 @@ env:
 language: c
 
 os: linux
+dist: bionic
+sudo: required
+
+arch:
+  - amd64
+  - arm64
 
 compiler:
-    - clang
-    - gcc
+  - clang
+  - gcc
 
-before_script:
-    - ./bootstrap
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -y build-essential
+  - echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
 
-after_success:
-    - bash <(curl -s https://codecov.io/bash)
+script:
+  - sh bootstrap
+  - ./configure
+  - make clean
+  - make -j
 
 addons:
     coverity_scan:
@@ -23,5 +34,5 @@ addons:
             description: "Build submitted via Travis CI"
         notification_email: krzysztof@burghardt.pl
         build_command_prepend: "./bootstrap ; ./configure ; make clean"
-        build_command: "make -j 4"
+        build_command: "make -j"
         branch_pattern: coverity_scan
