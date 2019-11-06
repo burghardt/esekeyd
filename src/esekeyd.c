@@ -122,13 +122,14 @@ int main (int argc, char *argv[])
         {
             if (fscanf(pid_fp, "%d", &pid) < 0) {
                 fprintf(stderr, "esekeyd: unable to read pid from %s.\n", pid_name);
+                exit(-1);
             }
             fclose(pid_fp);
 
             if (kill(pid, SIGUSR1)==0)
             {
                 fprintf(stderr, "esekeyd: already running as process %d.\n", pid);
-                exit(-1);
+                exit(-2);
             }
 
             unlink(pid_name);
