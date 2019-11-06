@@ -38,14 +38,14 @@ AC_HELP_STRING([--enable-gcc-debug],
         [enable_gcc_debug=no])
 if test "$enable_gcc_debug" = "yes" && (test "$GCC" = "yes"); then
  if test -z "$CFLAGS_CUSTOM"; then
-  CFLAGS="-Wall -O0 -ggdb -DDEBUGGER"
+  CFLAGS="-Wall -Wextra -Werror -O0 -ggdb -DDEBUGGER"
  else
   CFLAGS="$CFLAGS -O0 -ggdb -DDEBUGGER"
  fi
  AC_MSG_RESULT([Enabling GCC DEBUG support...])
 else
  if test -z "$CFLAGS_CUSTOM" && (test "$GCC" = "yes"); then
-  CFLAGS="-Wall -O2"
+  CFLAGS="-Wall -Wextra -Werror -O2"
  fi
 fi
 
