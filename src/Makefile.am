@@ -12,10 +12,10 @@ mkparser$(EXEEXT): $(mkparser_SOURCES)
 	$(CC_FOR_BUILD) -o $@ $(mkparser_SOURCES)
 
 parser.c: mkparser /usr/include/linux/input.h
-	./mkparser /usr/include/linux/input.h > parser.c
+	./mkparser /usr/include/linux/input-event-codes.h > parser.c
 
 #parser.c: mkparser /usr/src/linux/include/linux/input.h
-#	./mkparser /usr/src/linux/include/linux/input.h > parser.c
+#	./mkparser /usr/src/linux/include/linux/input-event-codes.h > parser.c
 
 clean-local:
 	rm -f parser.c
