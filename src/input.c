@@ -27,13 +27,15 @@ signed char check_handlers (void)
         size_t len = 0;
         unsigned short int number = 0;
         unsigned short int minor = 0;
-        getline (&buff, &len, fp);
-        sscanf (buff, "N: Number=%hu Name=%s Minor=%hu", &number, name, &minor);
-        free (buff);
-        if (strncmp (name, "evdev", 5) == 0 && minor == 64)
-        {
-            have_evdev = 1;
-            break;
+        if (getline (&buff, &len, fp) > 0) {
+            sscanf (buff, "N: Number=%hu Name=%s Minor=%hu", &number, name,
+                    &minor);
+            free (buff);
+            if (strncmp (name, "evdev", 5) == 0 && minor == 64)
+            {
+                have_evdev = 1;
+                break;
+            }
         }
     }
 
@@ -60,13 +62,14 @@ signed char find_input_dev (void)
         char *buff = NULL;
         size_t len = 0;
         short int number = -2;
-        getline (&buff, &len, fp);
-        sscanf (buff, "H: Handlers=kbd event%hu", &number);
-        free (buff);
-        if (number > -1)
-        {
-            have_evdev = number;
-            break;
+        if (getline (&buff, &len, fp) > 0) {
+            sscanf (buff, "H: Handlers=kbd event%hu", &number);
+            free (buff);
+            if (number > -1)
+            {
+                have_evdev = number;
+                break;
+            }
         }
     }
 
