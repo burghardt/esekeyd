@@ -10,6 +10,14 @@
 
 #include "esekey.h"
 
+#include <dirent.h>
+#define CLASS_DIR "/sys/class/input"
+#define DEV_DIR "/dev/input"
+
+#ifndef PATH_MAX
+#  define PATH_MAX 1024
+#endif
+
 signed char check_handlers (void)
 {
     FILE *fp = NULL;
@@ -47,33 +55,63 @@ signed char check_handlers (void)
     return 0;
 }
 
+/* return true if /dev/input/event<devno> is a keyboard.
+    This could also have been done by way of ioctls instead of reading
+    from /sys files. Hopefully the /sys API doesn't change...
+    It's documented thoroughly here:
+    https://unix.stackexchange.com/questions/74903/explain-ev-in-proc-bus-input-devices-data
+ */
+static int is_keyboard(int devno)
+{
+    char filename[PATH_MAX + 1];
+    char *buf = NULL;
+    size_t len = 0, caps = 0;
+    size_t wantcaps = (1 << EV_SYN | 1 << EV_KEY | 1 << EV_MSC | 1 << EV_LED | 1 << EV_REP);
+    FILE *fp;
+
+    sprintf(filename, "%s/event%d/device/capabilities/ev", CLASS_DIR, devno);
+    if(!(fp = fopen(filename, "r"))) return 0;
+
+    getline(&buf, &len, fp);
+    fclose(fp);
+    if(!buf) return 0;
+
+    caps = strtol(buf, NULL, 16);
+    free(buf);
+
+    return (caps & wantcaps) == wantcaps;
+}
+
+/* returns the highest-numbered keyboard found. The common case is
+    that the internal keyboard on a laptop is numbered lower than an external
+    keyboard, and we assume that if there's an external, it's the one the
+    user actually uses. If no keyboards are found, returns -1. */
 signed char find_input_dev (void)
 {
-    FILE *fp = NULL;
-    signed char have_evdev = -2;
+    DIR *dir;
+    struct dirent *entry;
+    int last_kbd = -1;
+    char buf[PATH_MAX + 1];
 
-    fp = fopen (INPUT_DEVICES, "r");
-
-    if (!fp)
+    dir = opendir(CLASS_DIR);
+    if(!dir) {
+        perror(CLASS_DIR);
         return -1;
+    }
 
-    while (!feof (fp))
-    {
-        char *buff = NULL;
-        size_t len = 0;
-        short int number = -2;
-        if (getline (&buff, &len, fp) > 0) {
-            sscanf (buff, "H: Handlers=kbd event%hu", &number);
-            free (buff);
-            if (number > -1)
-            {
-                have_evdev = number;
-                break;
+    while( (entry = readdir(dir)) ) {
+        sprintf(buf, "%s/%s", CLASS_DIR, entry->d_name);
+        if(strncmp(entry->d_name, "event", 5) == 0) {
+            int devno = atoi(entry->d_name + 5);
+            if(is_keyboard(devno)) {
+                fprintf(stderr, "event%d is a keyboard\n", devno);
+                if(devno > last_kbd) last_kbd = devno;
             }
         }
     }
+    closedir(dir);
 
-    fclose (fp);
+    fprintf(stderr, "Autodetected keyboard: %s/event%d\n", DEV_DIR, last_kbd);
 
-    return have_evdev;
+    return last_kbd;
 }
