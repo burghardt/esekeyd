@@ -1,0 +1,23 @@
+name: esekeyd
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron:  '0 0 * * *'
+
+jobs:
+  ubuntu:
+    name: ubuntu
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@master
+      - name: bootstrap
+        run: sh bootstrap
+      - name: configure
+        run: sh configure
+      - name: clean
+        run: make clean
+      - name: make
+        run: make
