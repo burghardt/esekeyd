@@ -72,7 +72,7 @@ static int is_keyboard(int devno)
     sprintf(filename, "%s/event%d/device/capabilities/ev", CLASS_DIR, devno);
     if(!(fp = fopen(filename, "r"))) return 0;
 
-    getline(&buf, &len, fp);
+    if (getline(&buf, &len, fp) < 1) return 0;;
     fclose(fp);
     if(!buf) return 0;
 
