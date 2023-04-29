@@ -1,7 +1,7 @@
 AC_INIT([ESE Key Daemon], [1.2.7], [krzysztof@burghardt.pl], [esekeyd])
 AC_CONFIG_AUX_DIR(build)
 AC_CONFIG_SRCDIR(src/esekeyd.c)
-AM_CONFIG_HEADER(config.h)
+AC_CONFIG_HEADERS(config.h)
 AM_INIT_AUTOMAKE
 AM_CONDITIONAL([DOT_GIT], [test -f .git/index])
 
@@ -31,7 +31,7 @@ open read close getopt_long)
 
 dnl Use option --enable-gcc-debug to enable GCC debug code. 
 AC_ARG_ENABLE(gcc-debug,
-AC_HELP_STRING([--enable-gcc-debug],
+AS_HELP_STRING([--enable-gcc-debug],
         [enable GCC DEBUG code]),
         [enable_gcc_debug=yes],
         [enable_gcc_debug=no])
